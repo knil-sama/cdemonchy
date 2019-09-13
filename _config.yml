@@ -3,9 +3,8 @@ repository: sproogen/resume-theme
 # favicon: images/favicon.ico
 
 # Personal info
-name: Clement Demonchy
-title: Data Emngineer
-website: https://knil-sama.github.io/cdemonchy/
+name: Clement Demonchytitle: Data Emngineer
+title: Data Engineer
 
 # Social links
 twitter_username: knil_sama
@@ -17,7 +16,7 @@ linkedin_username: clement-demonchy-55327778
 # about_title: About Me
 about_profile_image: images/profile.png
 about_content: | # this will include new lines to allow paragraphs
-  Data engineer at Jobteaser, python enthusiast and cat lover
+  Data engineer at Jobteaser, python enthusiast and cat lover  
   I am most skilled in: <mark>AWS</mark>, <mark>Python</mark>, <mark>PostgreSQL</mark> and <mark>Kubernetes</mark>
 
 # Projects Section
@@ -31,9 +30,17 @@ about_content: | # this will include new lines to allow paragraphs
 
 # Article Section
 # article_title: Article
+article_content: |
+  - [Autoscaling in DynamoDB using boto3](https://medium.com/@cols.knil/autoscaling-in-dynamodb-with-boto3-bf5bbeb99b10)
+  - [Python Packaging : How we manage it at JobTeaser](https://medium.com/jobteaser-dev-team/python-packaging-how-do-we-manage-it-at-jobteaser-2bc8d1e9d206i)
+  - [Kubernetes Cronjob 101 part 1](https://medium.com/jobteaser-dev-team/kubernetes-cronjob-101-56f0a8ea7ca2)
+  - [Kubernetes Cronjob 101 part 2](https://medium.com/@cols.knil/cronjob-101-part-2-78503d3967b3)
 
 # Presentation Section
 # presentation_title: Presentation
+presentation_content: |
+  - [From Mysql to PostgreSQL using Debezium](https://www.slideshare.net/ClementDemonchy/from-my-sql-to-postgresql-using-kafkadebezium)
+  - [Kafka 101](https://www.slideshare.net/ClementDemonchy/kafka-101)
 
 # More Section
 # more_title: A Little More About Me
