@@ -17,7 +17,7 @@ linkedin_username: clement-demonchy-55327778
 # about_title: About Me
 about_profile_image: images/profile.png
 about_content: | # this will include new lines to allow paragraphs
-Data engineer @Jobteaser, python enthusiast and cat lover
+  Data engineer at Jobteaser, python enthusiast and cat lover
   I am most skilled in: <mark>AWS</mark>, <mark>Python</mark>, <mark>PostgreSQL</mark> and <mark>Kubernetes</mark>
 
 # Projects Section
