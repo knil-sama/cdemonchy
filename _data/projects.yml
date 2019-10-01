@@ -1,13 +1,29 @@
-- layout: left
+- layout: top-middle
   name: tl;dr
   link: https://knil-sama.github.io/tl-semicolon-dr/
   github: https://github.com/knil-sama/tl-semicolon-dr
   quote: >
     Personal tl;dr for myself and to share with colleagues.
-- layout: right
+- layout: top-middle
+  name: La boite postale
+  link: https://d11rurl6mjtrix.cloudfront.net/
+  github: https://github.com/knil-sama/boite_postale
+  quote: >
+    Example of data visualization with Folium
+  description: | # this
+    Fetch open data from french government using <mark>python</mark> to deploy a interactive map on <mark>AWS</mark> with <mark>Travis CI</mark> 
+- layout: top-middle
+  name: Rubbersearch
+  github: https://github.com/knil-sama/rubbersearch
+  quote: >
+    Rest api in Rust
+  description: | # this
+    Rust code that process a local file to expose data using a REST API 
+- layout: top-middle
   name: ITM
   github: https://github.com/knil-sama/itm
   quote: >
     Example of airflow workflow
   description: | # this
-    Show how to run an <mark>airflow</mark> workflow while processing images, extracting metadata before storing it to a mongodb database there is failure when running the workflow to show how airflow handle it
+    Show how to run an <mark>airflow</mark> workflow while processing images, extracting metadata before storing it to a mongodb database,  
+    there is failure when running the workflow to show how airflow handle it
