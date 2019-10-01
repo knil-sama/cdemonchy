@@ -19,9 +19,9 @@
     - title: Big Data Engineer at Engie
       dates: September 2015 - May 2016
   quote: >
-    Engie is the main electricity provider in France and Ipsen is a pharmaceutical
+    Engie is the main electricity provider in France and Ipsen is a pharmaceutical company
   description: | # this will include new lines to allow paragraphs
-    Ipsen was building a "Big Data team" to propose innovative solutions.
-    the biggest 
+    Ipsen was building a "Big Data team" to propose innovative solutions.  
+    Stack used was docker, AWS, python and scikit-learn   
     Engie project called "PAP Part" was a commercial application that displayed customer on a map in order to support salesperson.  
     Stack used was MongoDB, Tomcat and Python
