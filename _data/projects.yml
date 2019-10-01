@@ -1,10 +1,10 @@
-- layout: top-middle
+- layout: top-left
   name: tl;dr
   link: https://knil-sama.github.io/tl-semicolon-dr/
   github: https://github.com/knil-sama/tl-semicolon-dr
   quote: >
     Personal tl;dr for myself and to share with colleagues.
-- layout: top-middle
+- layout: top-right
   name: ITM
   github: https://github.com/knil-sama/itm
   quote: >
