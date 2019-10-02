@@ -26,4 +26,4 @@
     Example of airflow workflow
   description: | # this
     Show how to run an <mark>airflow</mark> workflow while processing images, extracting metadata before storing it to a mongodb database,  
-    there is failure when running the workflow to show how airflow handle it
+    there is some failures that will randomly appear when running the workflow to show how airflow handle it 
