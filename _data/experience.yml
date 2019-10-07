@@ -5,16 +5,16 @@
     - title: Big Data Engineer
       dates: August 2017 - November 2019
   quote: >
-    JobTeaser is a French company that provides recruitment solutions to companies for the recruitment of young talent and a free career center software to higher education institutions in Europe.
+    JobTeaser is a French company that provides recruitment solutions to companies for the recruitment of young talents and a free career center software towards higher education institutions in Europe.
   description: | # this will include new lines to allow paragraphs
-    Was member of a small team of data engineer responsible for creating, deploying and maintenaing data related projects, (ML, ETL and API).
+    Was member of a 2-4 people team of data engineers responsible for creating, deploying and maintenaing data related projects, (ML, ETL and API).
     Stack used was Kubernetes, AWS, Python, Airflow and Kafka.
 
 - layout: left
   company:  Starclay
   link: http://www.starclay.fr/
   jobs:
-    - title: Big Data Engineer at Ipsen 
+    - title: Big Data Engineer at Ipsen
       dates: May 2016 - July 2017
     - title: Big Data Engineer at Engie
       dates: September 2015 - May 2016
@@ -23,5 +23,5 @@
   description: | # this will include new lines to allow paragraphs
     Ipsen was building a "Big Data team" to propose innovative solutions.  
     Stack used was docker, AWS, python and scikit-learn   
-    Engie project called "PAP Part" was a commercial application that displayed customer on a map in order to support salesperson.  
+    Engie project called "PAP Part" was a commercial application that displayed customers on a map in order to support salespersons.  
     Stack used was MongoDB, Tomcat and Python
