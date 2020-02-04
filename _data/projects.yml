@@ -1,27 +1,27 @@
 - layout: top-middle
   name: tl;dr
   link: https://knil-sama.github.io/tl-semicolon-dr/
-  github: https://github.com/knil-sama/tl-semicolon-dr
+  github: knil-sama/tl-semicolon-dr
   quote: >
     My personal opinions on articles and conferences that I have read and witnessed.
 - layout: top-middle
   name: La boite postale
   link: https://d11rurl6mjtrix.cloudfront.net/
-  github: https://github.com/knil-sama/boite_postale
+  github: knil-sama/boite_postale
   quote: >
     Example of data visualization with Folium
   description: | # this
     Fetch open data from french government using <mark>python</mark> to deploy an interactive map on <mark>AWS</mark> with <mark>Travis CI</mark> 
 - layout: top-middle
   name: Rubbersearch
-  github: https://github.com/knil-sama/rubbersearch
+  github: knil-sama/rubbersearch
   quote: >
     Rest api in Rust
   description: | # this
     Rust code that processes a local file to expose data using a REST API 
 - layout: top-middle
   name: ITM
-  github: https://github.com/knil-sama/itm
+  github: knil-sama/itm
   quote: >
     Example of airflow workflow
   description: | # this
