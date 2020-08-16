@@ -1,9 +1,29 @@
 - layout: left
+  company: Talend
+  link: https:wwww.talend.com
+  jobs:
+    - title: Big data Engineer
+      dates: March 2020 - Now
+  quote: >
+    Talend is an open source data integration platform. It provides various software and services for data integration, data management, enterprise application integration, data quality, cloud storage and Big Data.
+  description:
+    Create a pipeline of data in scala and spark to provide input for machine learning engineers
+- layout: left
+  company: Aircall
+  link: https://aircall.io
+  jobs:
+    - title: Big data Engineer
+      dates: November 2019 - February 2020
+  quote: >
+    Aircall is a cloud call center software
+  description: |
+    Write and maintain data pipeline in golang deployed on kinesis
+- layout: left
   company: Jobteaser
   link: https://www.jobteaser.com/en/home
   jobs:
     - title: Big Data Engineer
-      dates: August 2017 - November 2019
+      dates: August 2017 - October 2019
   quote: >
     JobTeaser is a French company that provides recruitment solutions to companies for the recruitment of young talents and a free career center software towards higher education institutions in Europe.
   description: | # this will include new lines to allow paragraphs
