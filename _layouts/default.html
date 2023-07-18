@@ -13,18 +13,17 @@
             {%- include about.html -%}
 
             {%- if site.data.projects.size > 0 -%}
-                {%- include projects.html -%}
+                {%- include site.data.projects.html -%}
             {%- endif -%}
 
             {%- if site.data.experience.size > 0 -%}
-                {%- include experience.html -%}
+                {%- include site.data.experience.html -%}
             {%- endif -%}
 
             {%- if site.data.education.size > 0 -%}
-                {%- include education.html -%}
+                {%- include site.data.education.html -%}
             {%- endif -%}
 
-            {%- include more.html -%}
 
         </div>
     </main>
