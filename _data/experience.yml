@@ -31,9 +31,9 @@
     Finops of team account with tagging, automation of resources deletion, budget alerts, reports
     Architecture of Sagemaker pipeline, model and endpoint on AWS
     Data pipeline on Databricks with Spark(Scala) to feed ML prediction models
-	  Deployment and optimisation of models to detect anomalies in customer jobs in python and Flask
-	  Extraction using talend studio job(Java) to dump postgresql database on s3 bucket as parquet
-	  Deployment Jenkins CI & Github Actions for data-science team
+    Deployment and optimisation of models to detect anomalies in customer jobs in python and Flask
+    Extraction using talend studio job(Java) to dump postgresql database on s3 bucket as parquet
+    Deployment Jenkins CI & Github Actions for data-science team
 - layout: left
   company: Jobteaser
   link: https://www.jobteaser.com/en/home
