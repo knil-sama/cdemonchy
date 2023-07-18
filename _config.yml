@@ -4,21 +4,19 @@ repository: sproogen/resume-theme
 
 # Personal info
 name: Clement Demonchy
-title: Data Engineer
+title: Freelance finops and data engineering
 
 # Social links
-twitter_username: knil_sama
 github_username:  knil-sama
-instagram_username: knilsama
 linkedin_username: clement-demonchy-55327778
 
 # About Section
 # about_title: About Me
 about_profile_image: images/profile.png
 about_content: | # this will include new lines to allow paragraphs
-  Data engineer at Jobteaser, python enthusiast and cat lover  
+  Freelancer, python enthusiast and cat lover  
   I am most proficient at: <mark>AWS</mark>, <mark>Python</mark>, <mark>PostgreSQL</mark> and <mark>Kubernetes</mark>
-
+  I like to dabble in <mark>Rust</mark> and <mark>TLA</mark>
 # Projects Section
 # projects_title: Projects
 

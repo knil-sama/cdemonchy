@@ -1,29 +1,45 @@
 - layout: left
+  company: Skillup
+  link: https:wwww.skillup.co
+  jobs:
+    - title: Lead data Engineer
+      dates: 2022 - 2023
+  quote: >
+    Skillup is a platform to make HR training management easy including interviews and skills 
+  description:
+    Responsible for a 4 persons team of 3 Data engineer and 1 ML engineer
+    Roadmap planification, team's rituals (postmortem, retrospective, daily)
+    Mentoring & pairing to share best coding practice (ruff, pydantic, pytest, …)
+    Python pipeline orchestrated by Airflow for managing scrapping/NLP & customer data external flux
+    Github actions CI/CD for data team's code testing and linting
+    Internal data validation site using Dash framework
+    Provide BI tools with Metabase and Superset
+    Provide data internaly with an Fastapi REST API to query Neo4j, MongoDB and PostgreSQL databases 
+    GRPC API to interact with typescript frontend serviced
+    KPI and roadmap's planification with shareholder and other technical teams
+
+- layout: left
   company: Talend
   link: https:wwww.talend.com
   jobs:
     - title: Big data Engineer
-      dates: March 2020 - Now
+      dates: 2020 - 2022
   quote: >
     Talend is an open source data integration platform. It provides various software and services for data integration, data management, enterprise application integration, data quality, cloud storage and Big Data.
   description:
-    Create a pipeline of data in scala and spark to provide input for machine learning engineers
-- layout: left
-  company: Aircall
-  link: https://aircall.io
-  jobs:
-    - title: Big data Engineer
-      dates: November 2019 - February 2020
-  quote: >
-    Aircall is a cloud call center software
-  description: |
-    Write and maintain data pipeline in golang deployed on kinesis
+    Responsible for team’s security, awarness presentation, training (secureflag), setting audit tools (veracode)
+    Finops of team account with tagging, automation of resources deletion, budget alerts, reports
+    Architecture of Sagemaker pipeline, model and endpoint on AWS
+    Data pipeline on Databricks with Spark(Scala) to feed ML prediction models
+	  Deployment and optimisation of models to detect anomalies in customer jobs in python and Flask
+	  Extraction using talend studio job(Java) to dump postgresql database on s3 bucket as parquet
+	  Deployment Jenkins CI & Github Actions for data-science team
 - layout: left
   company: Jobteaser
   link: https://www.jobteaser.com/en/home
   jobs:
     - title: Big Data Engineer
-      dates: August 2017 - October 2019
+      dates: 2017 - 2019
   quote: >
     JobTeaser is a French company that provides recruitment solutions to companies for the recruitment of young talents and a free career center software towards higher education institutions in Europe.
   description: | # this will include new lines to allow paragraphs
