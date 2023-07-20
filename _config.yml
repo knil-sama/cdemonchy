@@ -1,6 +1,9 @@
 # Site
-repository: sproogen/resume-theme
-# favicon: images/favicon.ico
+repository: knil-sama/cdemonchy
+# favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
+
+# Content configuration version
+version: 2
 
 # Personal info
 name: Clement Demonchy
@@ -10,6 +13,9 @@ title: Freelance finops and data engineering
 github_username:  knil-sama
 linkedin_username: clement-demonchy-55327778
 
+# Dark Mode (true/false/never)
+darkmode: false
+
 # About Section
 # about_title: About Me
 about_profile_image: images/profile.png
@@ -17,39 +23,161 @@ about_content: | # this will include new lines to allow paragraphs
   Freelancer, python enthusiast and cat lover  
   I am most proficient at: <mark>AWS</mark>, <mark>Python</mark>, <mark>PostgreSQL</mark> and <mark>Kubernetes</mark>
   I like to dabble in <mark>Rust</mark> and <mark>TLA</mark>
-# Projects Section
-# projects_title: Projects
 
-# Experience Section
-# experience_title: Experience
 
-# Education Section
-# educaton_title: Education
 
-more_content: | # this will include new lines to allow paragraphs
-  Articles  
-  - [Autoscaling in DynamoDB using boto3](https://medium.com/@cols.knil/autoscaling-in-dynamodb-with-boto3-bf5bbeb99b10)
-  - [Python Packaging : How we manage it at JobTeaser](https://medium.com/jobteaser-dev-team/python-packaging-how-do-we-manage-it-at-jobteaser-2bc8d1e9d206i)
-  - [Kubernetes Cronjob 101 part 1](https://medium.com/jobteaser-dev-team/kubernetes-cronjob-101-56f0a8ea7ca2)
-  - [Kubernetes Cronjob 101 part 2](https://medium.com/@cols.knil/cronjob-101-part-2-78503d3967b3)
+content:
+  - title: Projects # Title for the section
+    layout: list # Type of content section (list/text)
+    content:
+      - layout: top-middle
+        title: tl;dr
+        link: https://knil-sama.github.io/tl-semicolon-dr/
+        link_text: tl;dr
+        additional_links:
+          - title: knil-sama/tl-semicolon-dr
+            icon: fab fa-github
+            url: https://github.com/knil-sama/tl-semicolon-dr
+        quote: >
+          My personal opinions on articles and conferences that I have read and witnessed.
+      - layout: top-middle
+        title: La boite postale
+        link: https://d11rurl6mjtrix.cloudfront.net/
+        link_text: boite postale
+        additional_links:
+          - title: knil-sama/boite_postale
+            icon: fab fa-github
+            url: https://github.com/knil-sama/boite_postale
+        quote: >
+          Example of data visualization with Folium
+        description: | # this
+          Fetch open data from french government using <mark>python</mark> to deploy an interactive map on <mark>AWS</mark> with <mark>Travis CI</mark> 
+      - layout: top-middle
+        title: Rubbersearch
+        additional_links:
+          - title: knil-sama/rubbersearch
+            icon: fab fa-github
+            url: https://github.com/knil-sama/rubbersearch
+        quote: >
+          Rest api in Rust
+        description: | # this
+          Rust code that processes a local file to expose data using a REST API 
+      - layout: top-middle
+        title: ITM
+        additional_links:
+          - title: knil-sama/itm
+            icon: fab fa-github
+            url: https://github.com/knil-sama/itm
+        quote: >
+          Example of airflow workflow
+        description: | # this
+          Shows how to run an <mark>airflow</mark> workflow while processing images, extracting metadata before storing it in a mongodb database,<br/>
+          there are some failures that will randomly appear when running the workflow to show how airflow handles it 
+  - title: Experience
+    layout: list
+    content:
+      - layout: left
+        title: Skillup
+        link: https:wwww.skillup.co
+        sub_title: Lead data Engineer
+        caption: 2022 - 2023
+        quote: >
+          Skillup is a platform to make HR training management easy including interviews and skills 
+        description: |
+          Responsible for a 4 persons team of 3 Data engineer and 1 ML engineer<br/>
+          Roadmap planification, team's rituals (postmortem, retrospective, daily)<br/>
+          Mentoring & pairing to share best coding practice (ruff, pydantic, pytest, …)<br/>
+          Python pipeline orchestrated by Airflow for managing scrapping/NLP & customer data external flux<br/>
+          Github actions CI/CD for data team's code testing and linting<br/>
+          Internal data validation site using Dash framework<br/>
+          Provide BI tools with Metabase and Superset<br/>
+          Provide data internaly with an Fastapi REST API to query Neo4j, MongoDB and PostgreSQL databases<br/>
+          GRPC API to interact with typescript frontend serviced<br/>
+          KPI and roadmap's planification with shareholder and other technical teams
 
-  Presentations  
-  - [Kafka 101](https://www.slideshare.net/ClementDemonchy/kafka-101)
-  - [From Mysql to PostgreSQL using Debezium](https://www.slideshare.net/ClementDemonchy/from-my-sql-to-postgresql-using-kafkadebezium)
-      
-  Alongside my interests in data and software engineering some of my other interests and hobbies are:
-   - Triathlon
-   - Cooking
-   - Gaming
+      - layout: left
+        title: Talend
+        link: https:wwww.talend.com
+        sub_title: Big data Engineer
+        caption: 2020 - 2022
+        quote: >
+          Talend is an open source data integration platform. It provides various software and services for data integration, data management, enterprise application integration, data quality, cloud storage and Big Data.
+        description: |
+          Responsible for team’s security, awarness presentation, training (secureflag), setting audit tools (veracode)<br/>
+          Finops of team account with tagging, automation of resources deletion, budget alerts, reports<br/>
+          Architecture of Sagemaker pipeline, model and endpoint on AWS<br/>
+          Data pipeline on Databricks with Spark(Scala) to feed ML prediction models<br/>
+          Deployment and optimisation of models to detect anomalies in customer jobs in python and Flask<br/>
+          Extraction using talend studio job(Java) to dump postgresql database on s3 bucket as parquet<br/>
+          Deployment Jenkins CI & Github Actions for data-science team
+      - layout: left
+        title: Jobteaser
+        link: https://www.jobteaser.com/en/home
+        jobs:
+          - title: Big Data Engineer
+            dates: 2017 - 2019
+        quote: >
+          JobTeaser is a French company that provides recruitment solutions to companies for the recruitment of young talents and a free career center software towards higher education institutions in Europe.
+        description: | # this will include new lines to allow paragraphs
+          Was member of a 2-4 people team of data engineers responsible for creating, deploying and maintenaing data related projects, (ML, ETL and API).<br/>
+          Stack used was Kubernetes, AWS, Python, Airflow and Kafka.
+
+      - layout: left
+        title:  Starclay
+        link: http://www.starclay.fr/
+        sub_title: Big Data Engineer at Ipsen
+        caption: 2016 - 2017
+        quote: >
+          Ipsen is a pharmaceutical company
+        description: | # this will include new lines to allow paragraphs
+          Ipsen was building a "Big Data team" to propose innovative solutions.<br/> 
+          Stack used was docker, AWS, python and scikit-learn
+      - layout: left
+        title:  Starclay
+        link: http://www.starclay.fr/
+        sub_title: Big Data Engineer at Engie
+        caption: 2015 - 2016
+        quote: >
+          Engie is the main electricity provider in France
+        description: | # this will include new lines to allow paragraphs
+          Engie project called "PAP Part" was a commercial application that displayed customers on a map in order to support salespersons.<br/>
+          Stack used was MongoDB, Tomcat and Python
+  - title: Education
+    layout: list
+    content:
+      - layout: top-left
+        title: University Of Cergy-Pontoise (UCP)
+        caption: 2013 - 2015
+        sub_title: Master's degree in Computer Science
+        description: |
+          Main focus was on Java, Hadoop and SQL databases.<br/>
+          Included a 2 years internships at HSBC as software engineer.
+
+
 # Footer
 footer_show_references: true
+references_title: References on request
 
 # Build settings
-remote_theme: sproogen/resume-theme
+#theme: modern-resume-theme (Use this is you are hosting your resume yourself)
+remote_theme: sproogen/modern-resume-theme
 
 sass:
   sass_dir: _sass
   style: compressed
 
 plugins:
-        - jekyll-seo-tag
+ - jekyll-seo-tag
+
+exclude : [
+  "Gemfile",
+  "Gemfile.lock",
+  "node_modules",
+  "vendor/bundle/",
+  "vendor/cache/",
+  "vendor/gems/",
+  "vendor/ruby/",
+  "lib/",
+  "scripts/",
+  "docker-compose.yml",
+  ]
