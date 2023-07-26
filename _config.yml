@@ -41,9 +41,9 @@ content:
         quote: >
           My personal opinions on articles and conferences that I have read and witnessed.
       - layout: top-middle
-        title: La boite postale
-        link: https://d11rurl6mjtrix.cloudfront.net/
-        link_text: boite postale
+        title: Boite postale
+        link: https://boitepostale.cdemonchy.com/
+        link_text: Boite postale
         additional_links:
           - title: knil-sama/boite_postale
             icon: fab fa-github
