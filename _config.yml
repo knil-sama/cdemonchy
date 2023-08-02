@@ -18,7 +18,7 @@ darkmode: false
 
 # About Section
 # about_title: About Me
-about_profile_image: images/profile.png
+about_profile_image: images/profile.jpg
 about_content: | # this will include new lines to allow paragraphs
   Freelancer, python enthusiast and cat lover  
   I am most proficient at: <mark>AWS</mark>, <mark>Python</mark>, <mark>PostgreSQL</mark> and <mark>Kubernetes</mark>
