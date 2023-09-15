@@ -4,8 +4,11 @@ on:
     branches: ["main"]
   pull_request:
 env:
-  AWS_REGION : us-east-1
-  
+  AWS_REGION: us-east-1
+  CLOUD_FRONT_DISTRIBUTION_ID: EQ9X221SJSDOP
+  S3_BUCKET: aws-website-demonchy-5v3aj
+  AWS_ACCOUNT_ID: 650593633156
+  ROLE_UPDATE_WEBSITE: cdemonchy-website-update
 # Permission can be added at job level or workflow level    
 permissions:
   id-token: write   # This is required for requesting the JWT
@@ -29,11 +32,11 @@ jobs:
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v4.0.0
       with:
-        role-to-assume: arn:aws:iam::650593633156:role/cdemonchy-website-update
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.ROLE_UPDATE_WEBSITE }}
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
         aws-region: ${{ env.AWS_REGION }}
     - name: "Deploy to AWS S3"
-      run: aws s3 sync ./_site/ s3://aws-website-demonchy-5v3aj --delete --cache-control max-age=604800
+      run: aws s3 sync ./_site/ s3://${{ env.S3_BUCKET }} --delete --cache-control max-age=604800
     - name: "Create AWS Cloudfront Invalidation"
-      run: aws cloudfront create-invalidation --distribution-id EQ9X221SJSDOP --paths "/*"
+      run: aws cloudfront create-invalidation --distribution-id ${{ env.CLOUD_FRONT_DISTRIBUTION_ID }} --paths "/*"
 
