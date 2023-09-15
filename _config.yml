@@ -1,4 +1,5 @@
 source: . # did this work ?
+baseurl: cdemonchy.com
 # Site
 repository: knil-sama/cdemonchy
 # favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
