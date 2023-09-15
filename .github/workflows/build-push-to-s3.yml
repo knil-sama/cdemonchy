@@ -2,7 +2,6 @@ name: Build Jekyll site
 on:
   push:
     branches: ["main"]
-  pull_request:
 env:
   AWS_REGION: us-east-1
   CLOUD_FRONT_DISTRIBUTION_ID: EQ9X221SJSDOP
