@@ -1,8 +1,7 @@
 # source: . # did this work ?
 # baseurl: /
 # Site
-# no longer needed repository: knil-sama/cdemonchy
-repository:
+repository: knil-sama/cdemonchy
 # favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
 
 # Content configuration version
