@@ -39,7 +39,7 @@ jobs:
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
         aws-region: ${{ env.AWS_REGION }}
     - name: "Deploy to AWS S3"
-      run: aws s3 sync ./resume/_site/ s3://${{ env.S3_BUCKET }} --delete --cache-control max-age=604800
+      run: aws s3 sync ./resume/_site/ s3://${{ env.S3_BUCKET }} --cache-control max-age=604800
     - name: "Create AWS Cloudfront Invalidation"
       run: aws cloudfront create-invalidation --distribution-id ${{ env.CLOUD_FRONT_DISTRIBUTION_ID }} --paths "/*"
 
