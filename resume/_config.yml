@@ -32,15 +32,11 @@ content:
     layout: list # Type of content section (list/text)
     content:
       - layout: top-middle
-        title: tl;dr
-        link: https://knil-sama.github.io/tl-semicolon-dr/
-        link_text: tl;dr
-        additional_links:
-          - title: knil-sama/tl-semicolon-dr
-            icon: fab fa-github
-            url: https://github.com/knil-sama/tl-semicolon-dr
+        title: blog
+        link: https://cdemonchy/blog/
+        link_text: blog
         quote: >
-          My personal opinions on articles and conferences that I have read and witnessed.
+          Technical articles I wrote
       - layout: top-middle
         title: Boite postale
         link: https://boitepostale.cdemonchy.com/
