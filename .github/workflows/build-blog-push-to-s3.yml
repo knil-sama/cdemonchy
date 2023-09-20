@@ -25,9 +25,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-        cache: yarn
+        cache-dependency-path: 'blog/website/package-lock.json'
     - name: Install dependencies
-      run: yarn install --frozen-lockfile --non-interactive
+      run: npm install --frozen-lockfile --non-interactive
     - name: Build
       run: |
         cd blog/website
