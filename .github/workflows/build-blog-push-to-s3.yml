@@ -24,14 +24,17 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
+        cache: npm
         node-version: 18.x
         cache-dependency-path: 'blog/website/package-lock.json'
     - name: Install dependencies
-      run: npm install --frozen-lockfile --non-interactive
+      run: |
+        cd blog/website
+        npm install --frozen-lockfile --non-interactive
     - name: Build
       run: |
         cd blog/website
-        yarn build
+        npm build
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v4.0.0
       with:
