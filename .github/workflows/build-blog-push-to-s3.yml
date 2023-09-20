@@ -43,7 +43,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
     - name: "Deploy to AWS S3"
       run: |
-        rm .blog/website/blog/website/build/cdw/index.html # need to remove this root index to avoid conflict with resume
+        rm ./blog/website/build/cdw/index.html # need to remove this root index to avoid conflict with resume
         aws s3 sync ./blog/website/build/cdw s3://${{ env.S3_BUCKET }} --delete --cache-control max-age=604800
     - name: "Create AWS Cloudfront Invalidation"
       run: aws cloudfront create-invalidation --distribution-id ${{ env.CLOUD_FRONT_DISTRIBUTION_ID }} --paths "/*"
