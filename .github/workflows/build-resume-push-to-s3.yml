@@ -17,6 +17,8 @@ permissions:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
+      BUNDLE_GEMFILE: ${{ github.workspace }}/resume/Gemfile
     steps:
     - uses: actions/checkout@v4
     - name: Set up Ruby
