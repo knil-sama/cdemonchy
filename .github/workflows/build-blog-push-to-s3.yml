@@ -34,7 +34,7 @@ jobs:
     - name: Build
       run: |
         cd blog/website
-        npm build
+        npm run build
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v4.0.0
       with:
