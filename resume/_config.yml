@@ -33,7 +33,7 @@ content:
     content:
       - layout: top-middle
         title: blog
-        link: https://cdemonchy/blog/
+        link: https://cdemonchy.com/blog/
         link_text: blog
         quote: >
           Technical articles I wrote
