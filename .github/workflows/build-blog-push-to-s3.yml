@@ -1,7 +1,7 @@
-name: Build Jekyll site
+name: Build docusaurus blog
 on:
   push:
-    branches: ["main"]
+#    branches: ["main"]
 env:
   AWS_REGION: us-east-1
   CLOUD_FRONT_DISTRIBUTION_ID: EQ9X221SJSDOP
@@ -18,16 +18,20 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1.153.0
+    - name: Checkout
+      uses: actions/checkout@v4
+    # 👇 Build steps
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
       with:
-        ruby-version: "3.0" # Not needed with a .ruby-version file
-        bundler-cache: true
-    - name: "Build Site"
-      run: bundle exec jekyll build
-      env:
-        JEKYLL_ENV: production
+        node-version: 18.x
+        cache: yarn
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile --non-interactive
+    - name: Build
+      run: |
+        cd blog/website
+        yarn build
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v4.0.0
       with:
@@ -35,7 +39,9 @@ jobs:
         role-session-name: GitHub_to_AWS_via_FederatedOIDC
         aws-region: ${{ env.AWS_REGION }}
     - name: "Deploy to AWS S3"
-      run: aws s3 sync ./_site/ s3://${{ env.S3_BUCKET }} --delete --cache-control max-age=604800
+      run: |
+        rm .blog/website/blog/website/build/cdw/index.html # need to remove this root index to avoid conflict with resume
+        aws s3 sync ./blog/website/build/cdw s3://${{ env.S3_BUCKET }} --delete --cache-control max-age=604800
     - name: "Create AWS Cloudfront Invalidation"
       run: aws cloudfront create-invalidation --distribution-id ${{ env.CLOUD_FRONT_DISTRIBUTION_ID }} --paths "/*"
 

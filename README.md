@@ -13,3 +13,10 @@ https://knil-sama.github.io/cdemonchy/
 cd blog/website
 npm start
 ```
+
+# Build docusaurus
+
+```bash
+cd blog/website
+npm run build
+```
