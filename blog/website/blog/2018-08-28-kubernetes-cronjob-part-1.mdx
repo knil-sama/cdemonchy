@@ -1,0 +1,281 @@
+---
+title: "Kubernetes Cronjob 101: part 1"
+author: Clement Demonchy
+---
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+In this article I will try to explain with some specific examples how to run Cronjob on Kubernetes.
+
+Cronjob are basically Kubernetes jobs with a scheduling and some specific parameters to handle failure. Each Kubernetes job contains 1 to n pod.
+
+Those pods runs a program defined for the task and are killed when the task is over.
+<!--truncate-->
+
+The need
+---------
+
+At JobTeaser we were migrating away from a machine learning recommendation service running on a (ec2 + Airflow + Flask) platform on which tasks were running each night, to Kubernetes. The reasoning behind this change was to improve the monitoring and scaling capacities of the whole system.
+
+Since our new project didn’t require any complex workflow dependencies, someone suggested that, instead of our usual Airflow tasks where relationships between each operation are explicitly described by graphs, we should try using Kubernetes Cronjobs for extract load transform (ETL) batch scheduling.
+
+Most teams would have said: “wait a minute, it’s totally insane to learn a new tech during a single cycle”, but we just said YOLO (Yahoo!!! an Opportunity to Learn the Obvious). So, here’s what we’ve discovered on the way.
+
+Setup
+---------
+So first you need to setup Kubernetes client kubectl following [official documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+
+Then either you have a remote Kubernetes cluster [setup already](https://www.techrepublic.com/article/how-to-quickly-install-kubernetes-on-ubuntu/) or you have a local [minikube installed](https://kubernetes.io/docs/setup/minikube/), both solutions work for this case.
+
+Deploy a job on Kubernetes in 5 min
+---------
+
+This is my cat Walter. He has no idea of what Cronjob is but he has it in him. In this picture you can see him in the middle of his sleeping task.
+
+So… We’ll start with the most basic example we can use with the following cronjob configuration.
+
+This cronjob will run one job every 5 minutes (using a [cron format](https://crontab.guru/) for scheduling) and display “Hello world”
+
+```yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: test
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: hello
+              image: bash
+              command: ["echo",  "Hello world"]
+          restartPolicy: OnFailure
+```
+
+To launch this job you just need to run the following command (‘create’ also works but don’t [mix them together](https://stackoverflow.com/questions/47369351/kubectl-apply-vs-kubectl-create))
+
+```bash
+kubectl apply -f most_basic_cronjob.yaml
+```
+
+To check that the cronjob was created just use
+
+```bash
+kubectl get cronjob
+```
+
+<img alt="Before first schedule" src={useBaseUrl('/img/vA-vs-SY-ZyM7lvU_ca8Mg.webp')} />
+
+So cronjob was named “test” based on the _metadata.name_ value, the planning is the same as the one in _spec.schedule._ As a default function the job will run, so suspend value is False. There is currently no task running it (we didn’t plan it yet), Last Schedule and Age values are therefore void.
+
+If we check the status of our scheduled jobs after 5 minutes, here’s what we’ll see.
+
+<img alt="Active first schedule" src={useBaseUrl('/img/NjYIaBaDUPnI_DH55a3ZlA.webp')} />
+
+We can see a job has been created and is currently running, Last schedule and Age are filled in. To check the job in detail we need to go down a notch.
+
+```bash
+kubectl get job
+```
+
+<img alt="Job detail" src={useBaseUrl('/img/l56giFEwBKLSk9gCE2sK2g.webp')} />
+
+
+We can see here that a job was a created with a unique name and has not been completed yet, you can find the related pod by using the command.
+
+```bash
+kubectl describe job _name_of_job_
+```
+
+That will show the number of times the job has been restarted, full config of the job and the pod created. You can also use it on the cronjob itself.
+
+```bash
+kubectl describe cronjob test
+```
+
+Also if you want you can just run a job directly using the following (work with a kubectl version greater than 1.10.1)
+
+```bash
+kubectl create -f ./cronjob.yaml
+```
+
+See, the sleep task has been completed and the play task is being activated.
+
+Live editing of the cronjob
+---------
+
+But even better than that, you can edit the cronjob on the fly by using the following command.
+
+```bash
+kubectl edit cronjob test
+```
+
+```yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1beta1","kind":"CronJob","metadata":{"annotations":{},"name":"test","namespace":"default"},"spec":{"jobTemplate":{"spec":{"template":{"spec":{"containers":[{"command":["echo","hello wolrd"],"image":"bash","name":"hello"}],"restartPolicy":"Never"}}}},"schedule":"*/5 * * * *"}}
+  creationTimestamp: 2018-07-01T23:20:20Z
+  name: test
+  namespace: default
+  resourceVersion: "5421"
+  selfLink: /apis/batch/v1beta1/namespaces/default/cronjobs/test
+  uid: 52b419a5-7d85-11e8-a2dd-08002786e674
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - echo
+            - hello world
+            image: bash
+            imagePullPolicy: Always
+            name: hello
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: '*/5 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+status: {}
+```
+
+Wow! That’s a lot of information. Let’s remove some noise.
+
+```yaml
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - command:
+            - echo
+            - hello world
+            image: bash
+            imagePullPolicy: Always
+            name: hello
+          restartPolicy: Never
+          terminationGracePeriodSeconds: 30
+  schedule: '*/5 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+```
+Even better, now you may want to understand the parameters available when you’re editing. Some are mandatory, others optional — here’s the breakdown.
+
+Mandatory parameters with default values
+---------
+
+**concurrencyPolicy:** This parameter is responsible for running your job in parallel with other jobs. The available values are either “Allow” or “Forbid”, but remember “Forbid” CANNOT GUARANTEE THAT ONLY ONE JOB WILL BE RUN AT ONCE.
+
+**failedJobHistoryLimit** and **successfulJobsHistoryLimit** are just here to help trim the output of \`kubectl get jobs\` by deleting older entries.
+
+**suspend:** If _false_, the cronjob is actively scheduling job, if _true_ existing job will not be forced to terminate but new ones cannot be scheduled; this is useful for debugging when you want to stop your job from being launch or on the contrary set it to _true_ by default and to launch it manually.
+
+Optional parameters
+---------
+
+**activeDeadlineSeconds:** Doesn’t kill or stop the job itself but deletes the pod on error (the job will be replaced by a new one at the scheduled time).
+
+**startingDeadlineSeconds:** If for technical reasons (e.g. a cluster is down, …) a job cannot be started in the interval between _schedule time_ and _startingDeadlineSeconds_ it will not start at all. This is useful for long jobs when you should wait for the next one or short jobs with high frequency that can stack up if they aren’t stopped.
+
+**backoffLimit:** Number of retries for pods launched by the job. If you want your pods to never restart, you need to set it at 0. However due to some [issue](https://github.com/kubernetes/kubernetes/issues/54870) where pod can’t be restarted beyond backoffLimit it’s better, if you use “**restartPolicy** : Never”.
+
+Here is a more detailed cronjob example with most of the parameters:
+
+```yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: test
+spec:
+  schedule: "30 16,17,18,19 * * *"
+  concurrencyPolicy: "Forbid"
+  failedJobsHistoryLimit: 10
+  startingDeadlineSeconds: 600 # 10 min
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 3300 # 55min
+      template:
+        spec:
+          containers:
+            - name: hello
+              image: python:3.6-slim
+              command: ["python"]
+              args: ["/usr/src/app/job_offers.py"]
+          restartPolicy: Never
+```
+
+What we have here is a job that will run a script called job_offers.py that is expected to run for 45 minutes each day at 16h30, 17h30, 18h30 and 19h30 UTC.
+
+We don’t want multiple runs to be launched so we use **currencyPolicy** : “Forbid”. We don’t want it to runs for more than the expected time and overlap with the next execution time slot either, so we use **startDeadlineSeconds**: 600. This way a new job can only start when it has enough time to complete, like this:
+
+16h30–16h40, 17h30-17h40, 18h30–18h40, and 19h30-19h40.
+
+To complicate the exercise you can sometimes have jobs that will hang on a resource and go beyond 45min. In this case we want to kill this job and expect the next one to be completed. To do so, we specify an **activeDeadlineSeconds**: 3300 of 55minutes so the job will necessarily be killed before the next one.
+
+We also want to keep better track of failure so we increase **failedJobsHistoryLimit** up to 10.
+
+Petting job is about to get started for my cat.
+
+Nota Bene
+---------
+
+One of the most confusing concepts of Cronjobs is that jobs can never fail. How come? There are 3 options of what can happen to them:
+
+*   Waiting for completion
+*   Completed
+*   Deleted
+
+If the pod that executes the job fails for any reason (Out of memory, code failure, etc) each job will clutter the listing of jobs waiting for completion but won’t prevent the next job from running because they don’t have an active pod. That’s why it’s important to remember to also check that the pods are still running when managing cronjob and if not to delete jobs that can no longer complete.
+
+```bash
+kubectl delete job job_id
+```
+
+Also, **activeDeadlineSeconds** will not kill the job on the spot. It will start by deleting the pod and you will have a trace of this event in the job info acquired by the command **kubectl describe job _job_id_,** but after a new job is scheduled this job will be deleted for good.
+
+<img alt="What you will see" src={useBaseUrl('/img/T2C2Op9dMN8rw8qupH9DGg.webp')} />
+
+So far I would say that cronjobs aren’t a suitable solution that work for lot of data workflows mainly because you can’t have strong guarantees between jobs. However, it could be a good idea to use them if your jobs match the following criteria:
+
+*   Can be run concurrently (no lock on database)
+*   Have predictable memory usage (In case you use Limit on the pod)
+*   Job can handle dependent job failure
+
+To give you an example, here what we have currently:
+
+*   One job that imports data in one shot
+*   3 incremental views, the incremental part is important because that help us to handle import failures for both job that rely on it.
+*   A job doing the machine learning based recommendation, we only keep the last valid run.
+*   All jobs run at least 3 time a day to catch potential failures early on and act quickly.
+
+<img alt="job's DAG" src={useBaseUrl('/img/QAesvmr2U57BbekZ42XSsg.webp')} />
+
+Also it’s critical that you don’t rely too much on kubernetes commands to monitor your cronjob, at JobTeaser we use Datadog and ELK.
+
+Next part
+---------
+
+If you liked this article stay tuned for an upcoming part where we will explain how to run a Machine Learning pipeline from data import to the REST API exposition with Kubernetes.
+
+_Go here for the second part of_ <a href="https://cdemonchy.com/blog/2019/09/03/kubernetes-cronjob-part-2">cronjob 101</a>_._

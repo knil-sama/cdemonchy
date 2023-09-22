@@ -6,3 +6,17 @@ Template from https://github.com/sproogen/modern-resume-theme
 # Link to site
 
 https://knil-sama.github.io/cdemonchy/
+
+# Run docusaurus locally
+
+```bash
+cd blog/website
+npm start
+```
+
+# Build docusaurus
+
+```bash
+cd blog/website
+npm run build
+```
