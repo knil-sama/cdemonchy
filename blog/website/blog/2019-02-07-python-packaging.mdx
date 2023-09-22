@@ -1,19 +1,23 @@
 ---
-title: Python Packaging : How we manage it at JobTeaser
+title: "Python Packaging : How we manage it at JobTeaser"
 author: Clement Demonchy
 ---
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 How we managed to host own repository for python packaging on AWS
 <!--truncate-->
 
 The need
-========
+---------
 
 Here at JobTeaser, we found ourselves duplicating a great amount of code between text cleaning operations for machine learning projects, AWS wrapper, and Kafka helper.
 
 The solution we found to this trouble was to extract our reusable code into proper packages (correctly tested and documented), before pushing it to our own package server.
 
 Previous solution
-=================
+---------
+
+<img alt="Previous solution" src={useBaseUrl('/img/EUOCRxTBTc3Z4Hb0AAPfPQ.webp')} />
 
 The previous solution with own pypi
 
@@ -30,7 +34,7 @@ Previous solution limitations
 *   All the data is stored on the server without any backup!
 
 Looking for alternative(s)
-==========================
+---------
 
 Because our infra already runs on AWS, this search was limited to solutions that used S3 as a backend, after some time we found two solutions:
 
@@ -40,7 +44,7 @@ Because our infra already runs on AWS, this search was limited to solutions that
 S3pypi
 ------
 
-How we could have implemented S3pypi
+<img alt="How we could have implemented S3pypi" src={useBaseUrl('/img/ke3DDc9Woaj2JZx5W-kuAw.webp')} />
 
 As you can see the strongest point of the S3pypi solution is that it is straightforward.
 
@@ -61,7 +65,7 @@ But at Jobteaser, we manage all our AWS resource using Terraform. So we would ha
 Pypicloud
 ---------
 
-How we could have implemented Pypicloud
+<img alt="How we could have implemented Pypicloud" src={useBaseUrl('/img/v-jH4fEw3xsvTXZZ4cGOfg.webp')} />
 
 On the other hand we have Pypicloud that goes in the opposite direction with a more complex and modular solution.
 
@@ -82,7 +86,7 @@ Similarly to the current pypi solution, it requires a dedicated server but also 
 In the end the winner was Pypicloud, because, for the deployment, Cloudfront’s hidden complexity and the need to rely only on AWS IAM were unacceptable.
 
 Implementing the new solution
-=============================
+---------
 
 First, we need to create an s3 bucket, with access rights granted to a unique AWS user, in our case, the Pypicloud server.
 
@@ -90,18 +94,36 @@ One major change from the recommended AWS configuration is the use of a PostgreS
 
 We made this choice because for internal use the added complexity and cost were not worth it.
 
-Here’s the result:
+Here’s anexample of configuration (only containing cache and backend conf):
 
-example of configuration (only containing cache and backend conf)
+```toml
+[app:main]
+use = egg:pypicloud
+
+pypi.storage = s3
+storage.region_name = eu-west-1
+storage.bucket = <placeholder> 
+storage.prefix = packages/
+storage.redirect_urls = true
+pypi.auth = sql
+
+db.url = <placeholder>
+auth.db.url = <placeholder>
+
+pypi.default_read =
+		everyone
+pypi.default_write =
+		authenticated
+```
 
 Integration in the current pipeline
-===================================
+---------
 
 In the meantime, we’ve actually migrated on Kubernetes, with a CI on Jenkins.
 
 So here is the package publishing pipeline:
 
-Pypicloud package pipeline
+<img alt="Pypicloud package pipeline" src={useBaseUrl('/img/lyn1pAHSw7PYMObHaaCOEg.webp')} />
 
 For the package publication, we have a Github repository that contains Pypicloud configuration, a Dockerfile and Kubernetes resources for the server container that will be deployed.
 
@@ -109,7 +131,7 @@ This repository also contains other packages projects that will be tested in the
 
 The Pypicloud URL is templated in the Dockerfile in order to be accessed during the container build phase and set by Jenkins.
 
-Pypicloud projects pipeline
+<img alt="Pypicloud projects pipeline" src={useBaseUrl('/img/hR2hj50QfT6VcrxmQRBQTQ.webp')} />
 
 For the python projects deployment we have one repository per project, those repositories contain:
 
@@ -122,7 +144,7 @@ For the python projects deployment we have one repository per project, those rep
 This pipeline doesn’t require a Pypicloud user, because the Ingress configuration of the server will simply reject access from outside the Kubernetes cluster.
 
 TL;DR
-=====
+---------
 
 We needed a remote package service in python and we looked at 3 solutions:
 

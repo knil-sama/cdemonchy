@@ -1,49 +1,51 @@
 ---
-title: Clean AWS organization on your personal account part 1: SSO access
+title: "Clean AWS organization on your personal account part 1: SSO access"
 author: Clement Demonchy
 ---
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 
 Hello here, this post will relate my journey to upgrade my own AWS account to "production like" standard in term of security, organization and billing, each article will try to have one clear goal.
 <!--truncate-->
 
 This article will start first by explaining fundamental concepts  
-\*ROOT user  
-\*organization  
-\*AWS IAM Identity Center (previously AWS SSO)  
-\*IAM roles
+* ROOT user  
+* Organization  
+* AWS IAM Identity Center (previously AWS SSO)  
+* IAM roles
 
 Then we show how to access your AWS account using tools like [aws-sso-utils](https://github.com/benkehoe/aws-sso-util) instead of default user.
 
 Concepts
-========
+---------
 
 ROOT user
----------
+==================
 
 This will be your default user created by AWS when opening your account that will be the admin and have all the right [official documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html).
 
 Organization
-------------
+==================
 
 This is the way AWS allow you to associates multiple account, setup global policy and a single point of billing [official documentation](https://aws.amazon.com/organizations/).
 
 **AWS IAM Identity Center**
----------------------------
+==================
 
 Previously know as AWS SSO this is the way to create user and role that have SSO access, you can also have groups setup to avoid repeating setup for new user [official documentation](https://aws.amazon.com/iam/identity-center/).
 
 AWS roles
----------
+==================
 
 IAM roles regroup policy (what you can do with which services) that will be applied to a user or a group, those policies can be created by you or you can use the one already setup by AWS.
 
 IAM roles
----------
+==================
 
 IAM roles are a new way to give temporary access, the result is almost the same from an user standpoint but the from the account administrator you have a IAM role were you allow people to log into [official documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html).
 
 Setting SSO access
-==================
+---------
 
 One of the most fundamental concept in security [The Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege), states that **a subject should be given only those privileges needed for it to complete its task**, so as we saw before root user is able to do anything on your AWS account, so we need to setup other ways to access your AWS account in a more restricted way.
 
@@ -57,15 +59,21 @@ We now need to activate organization lucky for us this don’ t cost [anything](
 
 We can link federated user from other tools like Okta for example but we will keep it out of this article as this is too much for a personal account with only pet project.
 
-You need to go to service AWS SSO and select you account user under root.
+You need to go to service AWS SSO and select your account user under root.
+
+<img alt="SSO aws account" src={useBaseUrl('/img/AAOuiJQzeTs2KrrIcW351g.webp')} />
 
 Here we will create an new admin user.
 
+<img alt="Create admin user" src={useBaseUrl('/img/BUcWhjO1FIKga5_pE54oyQ.webp')} />
+
 Then navigate under permission set to give it one that is already provided by AWS **AdministratorAccess.**
+
+<img alt="Attach AdministratorAccess to admin user" src={useBaseUrl('/img/JZgrJy6YkUqAEwiUjtbjPQ.webp')} />
 
 We now have to set an local profile that can use you new
 
-```
+```toml
 [profile admin]  
  sso_start_url = <FETCH FROM YOUR AWS IAM IDENTITY CENTER CONSOLE>  
  sso_region = us-east-1  
@@ -77,7 +85,9 @@ We now have to set an local profile that can use you new
 
 I lost some time making this work because the sso_role_name didn't work with the role name but with the permission set name in this case.
 
-> `aws sso login — profile admin; export AWS_PROFILE=admin`
+```bash
+aws sso login — profile admin; export AWS_PROFILE=admin
+```
 
 You can also use this great tools to this setup, specify your role with each command and even start AWS console directly [aws-sso-utils](https://github.com/benkehoe/aws-sso-util)
 
@@ -85,4 +95,4 @@ Next step would be to create new users with more appropriate permission set, lik
 
 If you want to go deep into the security parts I recommend you look at how to enforce it at the organization level with [AWS SCPs](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html) and dig deeper into monitoring of the accounts [AWS detective](https://aws.amazon.com/detective/), [AWS GuardDuty](https://aws.amazon.com/guardduty/).
 
-Hope you like it and stay tuned for the next parts in this series Clean AWS organization on your personal account part 2: enforce tag policy
+Hope you like it and stay tuned for the next parts in this series [Clean AWS organization on your personal account part 2: enforce tag policy]({useBaseUrl('/2023/02/13/clean-aws-organization-part-2-enforce-tag-policy')})

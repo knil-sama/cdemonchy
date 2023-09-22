@@ -2,6 +2,8 @@
 title: Airflow 2.0 on docker-compose
 author: Clement Demonchy
 ---
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 So you heard of the brand new Airflow 2.0 and want to run it on your own machine to give it a go.
 
 Sadly, the [getting started](http://airflow.apache.org/docs/apache-airflow/stable/start.html) isn’t nearly ready for an integration environment as it neglects most of the interesting components and features like multiple workers to distribute tasks.
@@ -18,17 +20,35 @@ Don’t worry I have you covered.
 *   Flower as Celery’s GUI
 *   Home-made dags instead of Airflow examples
 
+<img alt="docker-compose architecture" src={useBaseUrl('/img/FfaKwSfDzNNSc4NJ.png')} />
+
 Here you can see the full infra we want to create from our project repository [https://github.com/knil-sama/itm](https://github.com/knil-sama/itm).
+
+```bash
+git clone git@github.com:knil-sama/itm.git
+cd itm
+docker-compose up
+```
 
 You can then acces the [Airflow GUI](http://0.0.0.0:8080)
 
 First thing you want to do once everything is up and running, is to login into airflow webserver with user “admin” and password “test”.
 
+
+<img alt="login interface airflow" src={useBaseUrl('/img/TwyGy5AnCoav-600.png')} />
+
+
 Then we can activate our dag “main\_dag” that will then be picked up by our scheduler every 5 min (or you can click on the play icon to trigger it by hand).
+
+<img alt="first DAG run airflow" src={useBaseUrl('/img/x3g25o8sRkoQH92p.png')} />
 
 Here for more details regarding DAG run.
 
+<img alt="DAG detail airflow" src={useBaseUrl('/img/NYTkMJ68rT5sg9E.png')} />
+
 Another interface you can interact with is the [Flower](http://0.0.0.0:5555) one that provides a monitoring of your celery workers.
+
+<img alt="flower interface" src={useBaseUrl('/img/hKirosPaJfpTknXY.png')} />
 
 If we take a look at the [docker-compose](https://github.com/knil-sama/itm/blob/main/docker-compose.yml) we can see the dependencies between each machines and starting order
 
@@ -44,5 +64,27 @@ Another thing to consider is that we share DAGs among the following machines so 
 To avoid duplicated configuration we create single env file [env\_airflow.env](https://github.com/knil-sama/itm/blob/main/env_airflow.env)
 
 Here some details of the configuration that are needed
+
+```toml
+# Don’t load sample dags
+AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=False
+# Use the same folder used when mapping volume
+AIRFLOW__CORE__DAGS_FOLDER=/usr/local/airflow/dags
+# Setup access to postgresql backend
+AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgres+psycopg2://airflow:airflow@postgres:5432/airflow
+# Used to secure variable in airflow backend
+AIRFLOW__CORE__FERNET_KEY=81HqDtbqAywKSOumSha3BhWNOdQ26slT6K0YaZeZyPs=
+# Use celery as a broker to distribute task
+AIRFLOW__CORE__EXECUTOR=CeleryExecutor
+# Key value backend for celery
+AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
+# Postgresql backend for celery (not the same uri than for other connection)
+AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://airflow:airflow@postgres:5432/airflow
+# Metadata backend
+AIRFLOW_CONN_METADATA_DB=postgres+psycopg2://airflow:airflow@postgres:5432/airflow
+AIRFLOW_VAR__METADATA_DB_SCHEMA=airflow
+# Setup heartbeat to check scheduler is alive
+AIRFLOW__SCHEDULER__SCHEDULER_HEARTBEAT_SEC=10
+```
 
 After that you are all set to experiment yourself with Airflow

@@ -1,33 +1,49 @@
 ---
-title: Clean AWS organization on your personal account part 2: enforce tag policy
+title: "Clean AWS organization on your personal account part 2: enforce tag policy"
 author: Clement Demonchy
 ---
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 Welcome to the second part in this series, this time we will setup on [tag policy](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html) for your AWS resources, that will allow us to define efficient billing in next post, in order to proceed you need to have setup properly your AWS organization.
 <!--truncate-->
 
 Tag Policy
-==========
+---------
 
 An tag policy is a list of tag key (think project, company, private, …) with some more rules that can enforce: capitalization, restrict value to hardcoded content or regex, specific resources to enforce non-compliant one (this could have unintended effect so I would recommend to read [this](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-enforcement.html) before using it).
 
 So this step is another clickops operation, under AWS Organizations service you can activate different policies the one we want right now is "Tag policies".
 
+<img alt="unlock tag policy" src={useBaseUrl('/img/8q1gfzqf92nNdbY1IaIm3A.webp')} />
+
 Once this is done you need to create a new policies.
 
+<img alt="create tag policy" src={useBaseUrl('/img/Ch4CsBkQ5qR6PoJitxfoEg.webp')} />
+
 This new policy will be defined by it name, description and a list of "Tag Key".
+
+<img alt="new policy" src={useBaseUrl('/img/MFI1rwQdD9omaMEtkLkGLQ.webp')} />
 
 Also you can tag your tag policy if you want to feel meta.
 
 After creating a tag policy you have to attach it on you account or root user.
 
+<img alt="attach tag policy" src={useBaseUrl('/img/MbY2u_Nctjwug3OXTprdTQ.webp')} />
+
 This allow you to check which resources you created that are not compliant your tag using Tag Policies AWS service
+
+<img alt="GUI showing no compliant resources" src={useBaseUrl('/img/RCz4vPsRao1JcS7-AnDdgw.webp')} />
 
 You can also start activating them in Billing as Cost allocation tags now that they are created and applied, it will matter in the next part of this series.
 
+<img alt="Example cost allocation tag" src={useBaseUrl('/img/Rh2lBMuyMH8hHlHFK-xUtA.webp')} />
+
+Terraform
+---------
+
 Here the same configuration done using terraform (you still need to click on enable Tag policies in AWS Organization first)
 
-```
+```yaml
 resource "aws_organizations_policy" "global_default_billing" {  
   content  = jsonencode(  
     {  
@@ -72,4 +88,4 @@ We can go on step further by adding SCPs that can enforce at creation constraint
 
 [Example SCPs for tagging resources](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples_tagging.html?source=post_page-----4022d451d24--------------------------------#example-require-tag-on-create)
 
-Hope you like it and stay tuned for the next parts in this series Clean AWS organization on your personal account part 3: budgets and billing reports
+Hope you like it and stay tuned for the next parts in this series  [Clean AWS organization on your personal account part 3: budgets and billing reports]({useBaseUrl('/2023/02/14/clean-aws-organization-part-3-budget-and-cost-reports')})
