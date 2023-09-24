@@ -29,7 +29,11 @@ module.exports={
   "themeConfig": {
     "navbar": {
       "title": "cdw technical blog",
-      "items": []
+      "logo": {
+        "src": "TODO_CREATE_LOGO",
+        "href": "blog"
+      },
+      "items": [],
     },
     "image": "img/undraw_online.svg",
     "footer": {
