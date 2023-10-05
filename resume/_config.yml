@@ -81,16 +81,21 @@ content:
         quote: >
           Skillup is a platform to make HR training management easy including interviews and skills 
         description: |
-          Responsible for a 4 persons team of 3 Data engineer and 1 ML engineer<br/>
-          Roadmap planification, team's rituals (postmortem, retrospective, daily)<br/>
-          Mentoring & pairing to share best coding practice (ruff, pydantic, pytest, …)<br/>
-          Python pipeline orchestrated by Airflow for managing scrapping/NLP & customer data external flux<br/>
-          Github actions CI/CD for data team's code testing and linting<br/>
-          Internal data validation site using Dash framework<br/>
-          Provide BI tools with Metabase and Superset<br/>
-          Provide data internaly with an Fastapi REST API to query Neo4j, MongoDB and PostgreSQL databases<br/>
-          GRPC API to interact with typescript frontend serviced<br/>
-          KPI and roadmap's planification with shareholder and other technical teams
+          I was responsible for a 4 person team of 3 Data engineers and 1 ML engineer at Skillup, an SaaS helping RH in the company to provide a better experience providing training for their employees and evaluating impact.
+          The team had a broad scope covering 4 principle subjects
+          -External data flux from customer with client import (user, booked training, …)  & export (training evaluation)
+          -Scrapping & cleaning training website for our catalog
+          -Provide internal metrics & dashboard so products team can gain insights
+          -Use latest AI technologies (LLM) to implement new feature for customer
+          My first task when starting here was to put in place a CI/CD using github action to structure coding practice with automated testing and linting.
+          All the while implementing team's rituals (postmortem, retrospective, daily, ownership rotation) as well as mentoring & pairing to share best coding practice (ruff, pydantic, pytest, …).
+          This allowed  us to refactor existing code more easily and made the team more resilient with people being able to work on other team member code.
+          The scrapping project required migration of Airflow orchestrated data pipelines that use Zyte for scrapping online training websites and extracting data using NLP models.
+          The frontend of Skillup being developed in Typescript we rely on GRPC API to interact with their system.
+          New services developed to allow complex importation of customer data were an Fastapi REST API to query Neo4j, MongoDB and PostgreSQL databases to reconcile existing data.
+          We then provided a website in intern developed in Dash for the product team in case a manual validation was required.
+          For the dashboarding we wanted to give a lot of autonomy for no tech savvy user and deployed both Metabase and Superset.
+          For the IA related project we needed to do some optimisation of OpenIA POC for generation of job's skills based on role title
 
       - layout: left
         title: Talend
@@ -100,13 +105,19 @@ content:
         quote: >
           Talend is an open source data integration platform. It provides various software and services for data integration, data management, enterprise application integration, data quality, cloud storage and Big Data.
         description: |
-          Responsible for team’s security, awarness presentation, training (secureflag), setting audit tools (veracode)<br/>
-          Finops of team account with tagging, automation of resources deletion, budget alerts, reports<br/>
-          Architecture of Sagemaker pipeline, model and endpoint on AWS<br/>
-          Data pipeline on Databricks with Spark(Scala) to feed ML prediction models<br/>
-          Deployment and optimisation of models to detect anomalies in customer jobs in python and Flask<br/>
-          Extraction using talend studio job(Java) to dump postgresql database on s3 bucket as parquet<br/>
-          Deployment Jenkins CI & Github Actions for data-science team
+          I was the first data engineer of a growing team of data scientists (5 to 7 people) that worked exclusively on state of the art machine learning for customer and internal needs.
+          We got a separate AWS account and a dedicated kubernetes namespace for our dev environment, as we were the first to do machine learning at Talend so a lot of new processes needed to be put in place.
+          In this context the first months were used to document and set guidelines for coding, testing, packaging and deployment using Github action and Jenkins.
+          We experimented with multiple platforms to deliver our solutions
+          -Data pipeline on Databricks with Scala and Python (Pyspark & Koala) to feed ML prediction models
+          -Deployment and optimisation of models to detect anomalies in customer’s jobs in python & Flask
+          -Extraction using Talend studio job(Java) to dump postgresql database on s3 bucket as parquet
+          -Extraction and computation on a Snowflake datawarehouse
+          We finally settled on Sagemaker for most of our projects and my role included finops responsibilities
+          -Managing AWS account resources using terraform (tagging, creation, deletion)
+          -Define with team's lead budget alerts and reports by slack/email with related dashboards to provide context
+          -Evaluation and optimisation regarding architecture of Sagemaker pipeline, model and endpoint on AWS
+          Other responsibilities included making people more aware of security with presentation, training on secureflag platform and setting audit tools in the CI with veracode.
       - layout: left
         title: Jobteaser
         link: https://www.jobteaser.com/en/home
@@ -116,9 +127,12 @@ content:
         quote: >
           JobTeaser is a French company that provides recruitment solutions to companies for the recruitment of young talents and a free career center software towards higher education institutions in Europe.
         description: | # this will include new lines to allow paragraphs
-          Was member of a 2-4 people team of data engineers responsible for creating, deploying and maintenaing data related projects, (ML, ETL and API).<br/>
-          Stack used was Kubernetes, AWS, Python, Airflow and Kafka.
-
+          I joined Jobteaser as the second data engineer of a 5 person team that provided data analysis and machine learning for the whole company.
+          The company was moving a startup to a scaleup so a lot of projects were doing migration from the legacy system to the new system.
+          -Migrate Elastic Beanstalk REST API on AWS to Kubernetes. 
+          -Rewrite/deploy job classification REST API in Flask. 
+          -Write/deploy ETL and REST API for job recommendation project.
+          Main project beside that was deploying the backbone of our data stack with a Kafka that allowed us to  stream our production database (MySQL) to our Postgresql using Debezium and change data capture patterns. We then loaded it into our datawarehouse (Redshift) that give data analyst opportunity to do realtime dashboard of backend activity
       - layout: left
         title:  Starclay
         link: http://www.starclay.fr/
@@ -127,8 +141,10 @@ content:
         quote: >
           Ipsen is a pharmaceutical company
         description: | # this will include new lines to allow paragraphs
-          Ipsen was building a "Big Data team" to propose innovative solutions.<br/> 
-          Stack used was docker, AWS, python and scikit-learn
+          Alongside another data engineer we exploring multiple projects to resolve issue encountered by marketing and research teams sharing progress during spring (3 weeks) for Ipsen an pharmaceutical company
+          The two most advanced projects are listed below and all of them were hosted on AWS ec2 using docker-compose.
+          -Team's responsible for handling clinical trials of new drugs needed insight on previous research done by other companies in the whole world, so we did data mining on official reports for specific diseases, cross referenced the sources then displayed it on an interactive map using Folium, we ended up pushing some fix to folium. 
+          -Marketing wanted to get feedback regarding new medicines on social media so we targeted tweets related to either the disease or drug,  developed an algorithm to identify key opinion leaders (either medical professional or public personality) then used nlp tools to do sentiment analysis. 
       - layout: left
         title:  Starclay
         link: http://www.starclay.fr/
@@ -137,8 +153,25 @@ content:
         quote: >
           Engie is the main electricity provider in France
         description: | # this will include new lines to allow paragraphs
-          Engie project called "PAP Part" was a commercial application that displayed customers on a map in order to support salespersons.<br/>
-          Stack used was MongoDB, Tomcat and Python
+          At Engie I worked on 2 projects with them
+          PAP:
+          With another data engineer and an app team in order to provide a solution to traveling salesmen that need to plan their road, get customer information and sign contracts on their tablets.
+          We had a huge focus on geolocation and we had to put in place
+          -Mongodb to store customer's data (60 millions users)
+          -REST API written in Java for the application team
+          -Fix customer addresses using google maps data and apache Lucene
+          This project was successfully deployed and is still in production.
+          GDF 360:
+          To help desk support of Engie to provide better service to customers we implemented a POC in 6 months that displayed all known previous interactions between a customer and the company (call, bills, contract, …) using a graph database (neo4j) on a temporal axis.
+      - layout: left
+        title:  HSBC
+        link: http://www.hsbc.fr/
+        sub_title: Back-end developer
+        caption: 2013 - 2015
+        quote: >
+          HSBC is a major banking company 
+        description: | # this will include new lines to allow paragraphs
+          At HSBC I was doing maintenance of banking features for customer account in collaboration with remote chinese team
   - title: Education
     layout: list
     content:
