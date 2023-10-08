@@ -123,8 +123,8 @@ content:
         title: Jobteaser
         link: https://www.jobteaser.com/en/home
         jobs:
-          - title: Big Data Engineer
-            dates: 2017 - 2019
+        sub_title: Big Data Engineer
+        caption: 2017 - 2019
         quote: >
           JobTeaser is a French company that provides recruitment solutions to companies for the recruitment of young talents and a free career center software towards higher education institutions in Europe.
         description: | # this will include new lines to allow paragraphs
