@@ -21,7 +21,9 @@ darkmode: false
 # about_title: About Me
 about_profile_image: images/profile.jpg
 about_content: | # this will include new lines to allow paragraphs
-  Freelancer, python enthusiast and cat lover  
+  I have 10 years of experience working as a data engineer in Python & AWS, assuming devops, architect and lead roles when needed.<br/>
+  I prefer working on missions where I can focus on workflows that bring value while making sure that costs are understood and managed.<br/>
+  I appreciate when I can interact with the infra and product team directly.<br/>
   I am most proficient at: <mark>AWS</mark>, <mark>Python</mark>, <mark>PostgreSQL</mark> and <mark>Kubernetes</mark>
   I like to dabble in <mark>Rust</mark> and <mark>TLA</mark>
 
