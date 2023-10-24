@@ -1,20 +1,31 @@
 # cdemonchy
 main access to public online project
 
+## CV
+
 Template from https://github.com/sproogen/modern-resume-theme
+deployed on https://cdemonchy.com/
 
-# Link to site
+### local run
 
-https://knil-sama.github.io/cdemonchy/
+```bash
+cd resume
+bundle install
+bundle exec jekyll serve
+```
 
-# Run docusaurus locally
+Open your browser to http://localhost:4000
+
+## Blog
+
+### Run docusaurus locally
 
 ```bash
 cd blog/website
 npm start
 ```
 
-# Build docusaurus
+### Build docusaurus
 
 ```bash
 cd blog/website
