@@ -8,7 +8,7 @@ version: 2
 
 # Personal info
 name: Clement Demonchy
-title: Freelance finops and data engineering
+title: Freelance data engineering
 
 # Social links
 github_username:  knil-sama
@@ -75,6 +75,41 @@ content:
   - title: Experience
     layout: list
     content:
+      - layout: left
+        title: Doctolib
+        link: https:wwww.skillup.co
+        sub_title: Data Engineer
+        caption: 2025 - 2025
+        quote: >
+          Doctolib is an appointment solution for healthcare professional and patient
+        description: |
+          In a team responsible for exposition and anonymization of production tables
+          -Change Data Capture of relational database to iceberg table using Debezium
+          -Create mirror tables with Pyspark job on EMR serverless
+          -Create and maintain dataset on google cloud using Crossplane and Kopf
+          -Install resources on GKE using Argocd
+      - layout: left
+        title: Be:mo (at TotalEnergies)
+        link: http://www.be-mo.io
+        sub_title: Data Engineer
+        caption: 2023 - 2025
+        quote: >
+          Be:mo provide a B2B solutions to help recharge electric vehicule (truck and car)
+        description: |
+          In a team responsible for working with electric vehicle supply equipment (EVSE) and exposing 
+          it with REST API for multiple BtB companies
+          -Migration of data workflow from Azure synapse to AWS databricks
+          -Writing CI job using Github Actions and Databricks bundle
+          -Using unity catalog to provide external access to dataset for services like PowerBi
+          - Usage of DLT table for streaming dataset
+          -Setting test for spark on dev machines to improve feedback
+          -Managing AWS & Databricks resources using terraform (tagging, creation, deletion)
+          -Define alerts based on Lambda metrics using cloudwatch
+          -Expose metrics of data workflow with PostgreSQL Aurora and grafana
+          -Documentation on workflow using Mermaid on Github
+          -Analyzing and reducing cost on Azure and AWS, for example by  dividing cost by 5 for AWS Lambda     
+            exploiting caching between service and improving batching of SQS elements
+          -Optimize geolocalization operation on PostgreSQL and detect invalid coordinates 
       - layout: left
         title: Skillup
         link: https:wwww.skillup.co
