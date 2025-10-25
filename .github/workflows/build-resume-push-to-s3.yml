@@ -20,9 +20,9 @@ jobs:
     env: # $BUNDLE_GEMFILE must be set at the job level, so it is set for all steps
       BUNDLE_GEMFILE: ${{ github.workspace }}/resume/Gemfile
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1.153.0
+      uses: ruby/setup-ruby@v1.265.0
       with:
         ruby-version: "3.0" # Not needed with a .ruby-version file
         bundler-cache: true
