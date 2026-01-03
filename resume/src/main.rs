@@ -6,10 +6,12 @@ pub use crate::yaml_struct::{Config, Sass, ContentWrapper, ContentDetail, Additi
 use serde_xml_rs::from_reader;
 use std::{fs::File};
 
+fn parse_xml_file(xml_filepath: String) -> Resume {
+    let file = File::open(xml_filepath).unwrap();
+    from_reader(file).unwrap()
+}
 
-fn main() {
-    let file = File::open("src/resume.xml").unwrap();
-    let xml_resume: Resume = from_reader(file).unwrap();
+fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
     let sass: Sass = Sass{
         sass_dir: "_sass".to_string(),
         style: "compressed".to_string()
@@ -21,22 +23,15 @@ fn main() {
             title: project.title,
             layout: LayoutDetail::TopMiddle,
             description: project.description,
-            link: match project.website {
-                Some(ref website) => Some(website.url.clone()),
-                _ => None
-            },
-            link_text:  match project.website {
-                Some(ref website) => Some(website.link_text.clone()),
-                _ => None 
-            },
-            additional_links: match project.github {
-                Some(github) => Some(vec![AdditionalLink{
-                    title: github.link_text,
+            link: project.website.as_ref().map(|website| website.url.clone()),
+            link_text: project.website.as_ref().map(|website| website.link_text.clone()),
+            additional_links: project.github.as_ref().map(|github|
+                vec![AdditionalLink{
+                    title: github.link_text.clone(),
                     icon: "fab fa-github".to_string(),
-                    url: github.url, 
-                    }]),
-                _ => None
-            },
+                    url: github.url.clone(), 
+                }]
+            ),
             ..Default::default()
         }).collect(),
         ..Default::default()
@@ -77,11 +72,11 @@ fn main() {
         linkedin_username: xml_resume.online.linkedin_username,
         about_profile_image: xml_resume.personal.profile_pic,
         about_content: xml_resume.about_me,
-        content: content,
+        content,
         footer_show_references: true,
         references_title: "References on request".to_string(),
         remote_theme: "sproogen/modern-resume-theme".to_string(),
-        sass: sass,
+        sass,
         plugins: vec!["jekyll-seo-tag".to_string()],
         exclude : vec![
           "Gemfile".to_string(),
@@ -100,3 +95,7 @@ fn main() {
     let output = File::create("./_config.yml").unwrap();
     let _ = serde_yaml_ng::to_writer(output,&yaml_config);
 }
+fn main() {
+    let xml_resume = parse_xml_file("src/resume.xml".to_string());
+    generate_yaml_config_from_xml_resume(xml_resume);
+}   

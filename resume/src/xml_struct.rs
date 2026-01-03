@@ -11,6 +11,7 @@ mod naive_date_format {
     const FORMAT: &str = "%Y-%m-%d";  
 
     /// Transforms a NaiveDate into a String
+    #[allow(dead_code)]
     pub fn serialize<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error>
         where
             S: Serializer,
