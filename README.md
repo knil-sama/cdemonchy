@@ -10,8 +10,7 @@ deployed on https://cdemonchy.com/
 
 ```bash
 cd resume
-bundle install
-bundle exec jekyll serve
+docker compose up --build
 ```
 
 Open your browser to http://localhost:4000
@@ -48,9 +47,9 @@ B --> t[TODO] --> Marketplace{shape: documents }
 # TODO
 
 [x] Convert yaml to xml file
-[] Validate XML
+[x] Validate XML
 [] Ask for correction on english
-[] read and parse using serde-xml-rs
-[] yaml for jenkins
+[x] read and parse using serde-xml-rs
+[x] yaml for Jekyl
 [] latex -> pdf
 [] update cv on other plateforms
