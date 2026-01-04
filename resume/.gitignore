@@ -6,3 +6,5 @@ Gemfile.lock
 *.code-workspace
 debug
 target
+# secret for connecting to website
+.secrets
