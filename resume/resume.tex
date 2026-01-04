@@ -1,0 +1,211 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}
+%====================
+% OFFICIAL PUBLIC OVERLEAF TEMPLATE
+% https://www.overleaf.com/latex/templates/data-science-tech-resume-template/zcdmpfxrzjhv
+% 
+%====================
+%
+% Resume template for data scientists, a complement to data-science-tech-cover-letter-template:
+% https://www.overleaf.com/latex/templates/data-science-tech-cover-letter-template/gbrcqktbsfxf
+%
+% Files:        resume.tex: Main file
+%               _header.tex: header code
+%               TLCresume.sty: style file containing formatting details
+%               section/objective: https://www.indeed.com/career-advice/resumes-cover-letters/resume-objective-examples
+%               section/skills: table of skills
+%               section/experience: projects or roles
+%               section/education: schools and stuff
+%               section/activities: optional, could comment out in resume.tex.
+%
+% Editor:       https://github.com/TimmyChan 
+%               https://www.linkedin.com/in/timmy-l-chan/
+%               
+% Last Updated: March 24th, 2022
+%
+%====================
+
+
+\usepackage{TLCresume}
+\usepackage{xcolor, soul}
+
+\sethlcolor{black}
+%====================
+% CONTACT INFORMATION
+%====================
+\def\name{Clement Demonchy}  % Name Here
+\def\email{cdw@cdemonchy.com}
+\def\LinkedIn{clement-demonchy-55327778} % linkedin.com/in/______
+\def\github{knil-sama} % github username
+\def\role{Senior data engineer and data architect freelance} % JOB TITLE
+\def\portfolioname{cdemonchy.com}
+
+%====================
+% Header: Contact
+%====================
+
+\RequirePackage{fancyhdr}
+
+\fancypagestyle{first_page}{
+	\fancyhf{}
+	\lhead{
+		\phone \\ % PHONE    
+		\city \\ % CITI
+		\href{mailto:\email}{\email} % EMAIL
+	}
+	\chead{
+		\centering
+		{\Huge \skills \name} \\
+		\vspace{.25em}
+		{\color{highlight} \Large{\role}}
+	}
+	\rhead{
+		\href{https://www.linkedin.com/in/\LinkedIn}{\LinkedIn} \\% LinkedIn
+		\href{https://\portfolioname}{\portfolioname} \\ % Portfolio
+		\href{https://github.com/\github}{\github} % Github
+	}
+	\renewcommand{\headrulewidth}{1pt} % 2pt header rule
+	\renewcommand{\headrule}{\hbox to\headwidth{\color{highlight}\leaders\hrule height \headrulewidth\hfill}}
+	\setlength{\headheight}{90pt}
+	\setlength{\headsep}{5pt}
+}
+
+\fancypagestyle{others}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\setlength{\headheight}{30pt}
+	\setlength{\headsep}{5pt}
+}
+
+\begin{document}\pagestyle{others}\thispagestyle{first_page}
+
+I have more than 10 years of experience working as a data engineer mainly in \textbf{Python} and \textbf{AWS}, assuming devops, architect and lead roles when needed.\\
+    I prefer working on missions where I can focus on workflows that bring value while making sure that the tradeoff (cost, reliability, performance) are understood and managed.\\
+    I appreciate when I can interact with the infra and product team directly.\\
+    I am most proficient at: \textbf{AWS}, \textbf{Python}, \textbf{PostgreSQL}, \textbf{Kubernetes} and \textbf{Databricks}
+    I have experiences on \textbf{Azure} and \textbf{GCP} as well as \textbf{Scala}, \textbf{Neo4j} and \textbf{MongoDB}
+    I like to dabble in \textbf{Rust} and \textbf{TLA}
+
+% TODO \section{Skills}
+% TODO \input{sections/skills}
+
+\section{Technical Experience}
+
+\subsection{{Data Engineer \hfill 2025-04-02 --- 2025-10-07}}
+\smallskip
+\subtext{\href{https://doctolib.fr/}{Doctolib} \hfill Levallois-Perret}
+\medskip
+In a team responsible for exposition and anonymization of production tables\\
+            -Change Data Capture of relational database to \textbf{Iceberg} table using \textbf{Debezium}\\
+            -Create mirror tables with \textbf{Pyspark} job on \textbf{EMR} serverless\\
+            -Create and maintain dataset on google cloud using \textbf{Crossplane} and \textbf{Kopf}\\
+            -Install resources on \textbf{GKE} using \textbf{Argocd}
+\medskip
+
+\subsection{{Data Engineer \hfill 2023-10-01 --- 2025-03-31}}
+\smallskip
+\subtext{\href{https://www.be-mo.io/}{Be:mo (at TotalEnergies)} \hfill Paris 2ème arrondissement}
+\medskip
+In a team responsible for working with electric vehicle supply equipment (EVSE) and exposing 
+            it with REST \textbf{API} for multiple BtB companies\\
+            -Migration of data workflow from \textbf{Azure} synapse to \textbf{AWS} \textbf{Databricks}\\
+            -Writing CI job using \textbf{Github} \textbf{Actions} and \textbf{Databricks} bundle\\
+            -Using unity catalog to provide external access to dataset for services like PowerBi\\
+            -Usage of DLT table for streaming dataset\\
+            -Setting test for spark on dev machines to improve feedback\\
+            -Managing \textbf{AWS} and \textbf{Databricks} resources using \textbf{Terraform} (tagging, creation, deletion)\\
+            -Define alerts based on \textbf{Lambda} metrics using \textbf{Cloudwatch}\\
+            -Expose metrics of data workflow with \textbf{PostgreSQL} \textbf{Aurora} and \textbf{Grafana}\\
+            -Documentation on workflow using Mermaid on \textbf{Github}\\
+            -Analyzing and reducing cost on \textbf{Azure} and \textbf{AWS}, for example by  dividing cost by 5 for \textbf{AWS} \textbf{Lambda}     
+            exploiting caching between service and improving batching of SQS elements\\
+            -Optimize geolocalization operation on \textbf{PostgreSQL} and detect invalid coordinates
+\medskip
+
+\subsection{{Lead data Engineer \hfill 2022-11-01 --- 2023-07-01}}
+\smallskip
+\subtext{\href{https://skillup.co/}{Skillup} \hfill Paris 10ème arrondissement}
+\medskip
+I was responsible for a 4 person team of 3 Data engineers and 1 ML engineer at Skillup, an SaaS helping RH in the company to provide a better experience providing training for their employees and evaluating impact.\\
+            The team had a broad scope covering 4 principle subjects\\
+            -External data flux from customer with client import (user, booked training, …) and export (training evaluation)\\
+            -Scrapping and cleaning training website for our catalog\\
+            -Provide internal metrics and dashboard so products team can gain insights\\
+            -Use latest AI technologies (LLM) to implement new feature for customer\\
+            My first task when starting here was to put in place a CI/CD using \textbf{Github} \textbf{Actions} to structure coding practice with automated testing and linting.\\
+            All the while implementing team's rituals (postmortem, retrospective, daily, ownership rotation) as well as mentoring and pairing to share best coding practice (\textbf{Ruff}, \textbf{Pydantic}, \textbf{Pytest}, …).\\
+            This allowed  us to refactor existing code more easily and made the team more resilient with people being able to work on other team member code.\\
+            The scrapping project required migration of \textbf{Airflow} orchestrated data pipelines that use Zyte for scrapping online training websites and extracting data using NLP models.\\
+            The frontend of Skillup being developed in Typescript we rely on GRPC \textbf{API} to interact with their system.\\
+            New services developed to allow complex importation of customer data were an Fastapi REST \textbf{API} to query \textbf{Neo4j}, \textbf{MongoDB} and \textbf{PostgreSQL} databases to reconcile existing data.\\
+            We then provided a website in intern developed in Dash for the product team in case a manual validation was required.\\
+            For the dashboarding we wanted to give a lot of autonomy for no tech savvy user and deployed both Metabase and Superset.\\
+            For the IA related project we needed to do some optimisation of OpenIA POC for generation of job's skills based on role title
+\medskip
+
+\subsection{{Data Engineer \hfill 2020-03-01 --- 2022-10-01}}
+\smallskip
+\subtext{\href{https://talend.com/}{Talend} \hfill Suresnes}
+\medskip
+I was the first data engineer of a growing team of data scientists (5 to 7 people) that worked exclusively on state of the art machine learning for customer and internal needs.\\
+            We got a separate \textbf{AWS} account and a dedicated kubernetes namespace for our dev environment, as we were the first to do machine learning at Talend so a lot of new processes needed to be put in place.\\
+            In this context the first months were used to document and set guidelines for coding, testing, packaging and deployment using \textbf{Github} \textbf{Actions} and Jenkins.\\
+            We experimented with multiple platforms to deliver our solutions\\
+            -Data pipeline on \textbf{Databricks} with \textbf{Scala} and \textbf{Python} (\textbf{Pyspark} and Koala) to feed ML prediction models\\
+            -Deployment and optimisation of models to detect anomalies in customer’s jobs in \textbf{Python} and \textbf{Flask}\\
+            -Extraction using Talend studio job(Java) to dump \textbf{PostgreSQL} database on \textbf{S3} bucket as parquet\\
+            -Extraction and computation on a \textbf{Snowflake} datawarehouse\\
+            We finally settled on Sagemaker for most of our projects and my role included finops responsibilities\\
+            -Managing \textbf{AWS} account resources using terraform (tagging, creation, deletion)\\
+            -Define with team's lead budget alerts and reports by slack/email with related dashboards to provide context\\
+            -Evaluation and optimisation regarding architecture of Sagemaker pipeline, model and endpoint on \textbf{AWS}\\
+            Other responsibilities included making people more aware of security with presentation, training on secureflag platform and setting audit tools in the CI with veracode.
+\medskip
+
+\subsection{{Data Engineer \hfill 2017-08-01 --- 2019-10-01}}
+\smallskip
+\subtext{\href{https://jobteaser.com/}{Jobteaser} \hfill Paris 9ème arrondissement}
+\medskip
+I joined Jobteaser as the second data engineer of a 5 person team that provided data analysis and machine learning for the whole company.\\
+            The company was moving a startup to a scaleup so a lot of projects were doing migration from the legacy system to the new system.\\
+            -Migrate Elastic Beanstalk REST \textbf{API} on \textbf{AWS} to \textbf{Kubernetes}.\\
+            -Rewrite/deploy job classification REST \textbf{API} in \textbf{Flask}.\\
+            -Write/deploy ETL and REST \textbf{API} for job recommendation project.\\
+            Main project beside that was deploying the backbone of our data stack with a \textbf{Kafka} that allowed us to  stream our production database (MySQL) to our PostgreSQL using \textbf{Debezium} and change data capture patterns.\\
+            We then loaded it into our datawarehouse (\textbf{Redshift}) that give data analyst opportunity to do realtime dashboard of backend activity
+\medskip
+
+\subsection{{Data Engineer \hfill 2016-09-01 --- 2017-08-01}}
+\smallskip
+\subtext{\href{https://ipsen.com/}{Ipsen} \hfill Issy Les Moulineaux}
+\medskip
+Alongside another data engineer we exploring multiple projects to resolve issue encountered by marketing and research teams sharing progress during spring (3 weeks) for Ipsen an pharmaceutical company\\
+            The two most advanced projects are listed below and all of them were hosted on \textbf{AWS} \textbf{EC2} using docker-compose.\\
+            -Team's responsible for handling clinical trials of new drugs needed insight on previous research done by other companies in the whole world, so we did data mining on official reports for specific diseases, cross referenced the sources then displayed it on an interactive map using Folium, we ended up pushing some fix to folium.\\
+            -Marketing wanted to get feedback regarding new medicines on social media so we targeted tweets related to either the disease or drug,  developed an algorithm to identify key opinion leaders (either medical professional or public personality) then used nlp tools to do sentiment analysis.\\
+\medskip
+
+\subsection{{Data Engineer \hfill 2015-09-01 --- 2016-08-30}}
+\smallskip
+\subtext{\href{https://engie.com/}{Engie} \hfill La Défense}
+\medskip
+At Engie I worked on 2 projects with them\\
+            PAP:\\
+            With another data engineer and an app team in order to provide a solution to traveling salesmen that need to plan their road, get customer information and sign contracts on their tablets.\\
+            We had a huge focus on geolocation and we had to put in place\\
+            -Mongodb to store customer's data (60 millions users)\\
+            -REST \textbf{API} written in Java for the application team\\
+            -Fix customer addresses using google maps data and apache Lucene\\
+            This project was successfully deployed and is still in production.\\
+            GDF 360:\\
+            To help desk support of Engie to provide better service to customers we implemented a POC in 6 months that displayed all known previous interactions between a customer and the company (call, bills, contract, …) using a graph database (\textbf{Neo4j}) on a temporal axis.\\
+\medskip
+
+
+% make a newpage wherever it is a clean break
+% \newpage\pagestyle{others}
+
+\section{Education}
+\skills{Master's degree in Computer Science}, \textit{University Of Cergy-Pontoise (UCP)}	\hfill 2013-09-01 - 2015-06-30
+\end{document}

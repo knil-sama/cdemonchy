@@ -1,0 +1,103 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=red]{hyperref}
+%====================
+% OFFICIAL PUBLIC OVERLEAF TEMPLATE
+% https://www.overleaf.com/latex/templates/data-science-tech-resume-template/zcdmpfxrzjhv
+% 
+%====================
+%
+% Resume template for data scientists, a complement to data-science-tech-cover-letter-template:
+% https://www.overleaf.com/latex/templates/data-science-tech-cover-letter-template/gbrcqktbsfxf
+%
+% Files:        resume.tex: Main file
+%               _header.tex: header code
+%               TLCresume.sty: style file containing formatting details
+%               section/objective: https://www.indeed.com/career-advice/resumes-cover-letters/resume-objective-examples
+%               section/skills: table of skills
+%               section/experience: projects or roles
+%               section/education: schools and stuff
+%               section/activities: optional, could comment out in resume.tex.
+%
+% Editor:       https://github.com/TimmyChan 
+%               https://www.linkedin.com/in/timmy-l-chan/
+%               
+% Last Updated: March 24th, 2022
+%
+%====================
+
+
+\usepackage{TLCresume}
+\usepackage{xcolor, soul}
+
+\sethlcolor{black}
+%====================
+% CONTACT INFORMATION
+%====================
+\def\name{%{ firstname }% %{ lastname }%}  % Name Here
+\def\email{%{ email }%}
+\def\LinkedIn{%{ linkedin }%} % linkedin.com/in/______
+\def\github{%{ github }%} % github username
+\def\role{%{ role }%} % JOB TITLE
+\def\portfolioname{%{ portofolio_name }%}
+
+%====================
+% Header: Contact
+%====================
+
+\RequirePackage{fancyhdr}
+
+\fancypagestyle{first_page}{
+	\fancyhf{}
+	\lhead{
+		\phone \\ % PHONE    
+		\city \\ % CITI
+		\href{mailto:\email}{\email} % EMAIL
+	}
+	\chead{
+		\centering
+		{\Huge \skills \name} \\
+		\vspace{.25em}
+		{\color{highlight} \Large{\role}}
+	}
+	\rhead{
+		\href{https://www.linkedin.com/in/\LinkedIn}{\LinkedIn} \\% LinkedIn
+		\href{https://\portfolioname}{\portfolioname} \\ % Portfolio
+		\href{https://github.com/\github}{\github} % Github
+	}
+	\renewcommand{\headrulewidth}{1pt} % 2pt header rule
+	\renewcommand{\headrule}{\hbox to\headwidth{\color{highlight}\leaders\hrule height \headrulewidth\hfill}}
+	\setlength{\headheight}{90pt}
+	\setlength{\headsep}{5pt}
+}
+
+\fancypagestyle{others}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\setlength{\headheight}{30pt}
+	\setlength{\headsep}{5pt}
+}
+
+\begin{document}\pagestyle{others}\thispagestyle{first_page}
+
+%{ objective }%
+
+% TODO \section{Skills}
+% TODO \input{sections/skills}
+
+\section{Technical Experience}
+%% for experience in experiences %%
+\subsection{{%{ experience.role }% \hfill %{ experience.start_date }% --- %{ experience.end_date}%}}
+\smallskip
+\subtext{\href{%{ experience.company.url }%}{%{ experience.company.name }%} \hfill %{ experience.location }%}
+\medskip
+%{ experience.description }%
+\medskip
+%% endfor %%
+
+% make a newpage wherever it is a clean break
+% \newpage\pagestyle{others}
+
+\section{Education}
+\skills{%{ education.title }%}, \textit{%{ education.university }%}	\hfill %{ education.start_date }% - %{ education.end_date }%
+\end{document}

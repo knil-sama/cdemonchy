@@ -1,0 +1,18 @@
+[general]
+# Directories to search for templates, relative to the crate root.
+dirs = ["templates"]
+default_syntax = "tex"
+
+
+[[escaper]]
+path = "askama::filters::Text"
+extensions = ["tex"]
+
+[[syntax]]
+name = "tex"
+expr_start = "%{"
+expr_end = "}%"
+block_start= "%%"
+block_end= "%%"
+comment_start= "%#"
+comment_end= "#%"

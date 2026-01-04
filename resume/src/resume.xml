@@ -5,18 +5,19 @@
         <lastname>Demonchy</lastname>
         <title>Senior data engineer and data architect freelance</title>
         <profile_pic>images/profile.jpg</profile_pic>
+        <email>cdw@cdemonchy.com</email>
     </personal>
     <online>
         <website>cdemonchy.com</website>
         <github_username>knil-sama</github_username>
         <linkedin_username>clement-demonchy-55327778</linkedin_username>
     </online>
-    <about_me>I have more than 10 years of experience working as a data engineer mainly in Python &amp; AWS, assuming devops, architect and lead roles when needed.&lt;br/&gt;
+    <about_me>I have more than 10 years of experience working as a data engineer mainly in Python and AWS, assuming devops, architect and lead roles when needed.&lt;br/&gt;
     I prefer working on missions where I can focus on workflows that bring value while making sure that the tradeoff (cost, reliability, performance) are understood and managed.&lt;br/&gt;
     I appreciate when I can interact with the infra and product team directly.&lt;br/&gt;
-    I am most proficient at: &lt;mark&gt;AWS&lt;/mark&gt;, &lt;mark&gt;Python&lt;/mark&gt;, &lt;mark&gt;PostgreSQL&lt;/mark&gt;, &lt;mark&gt;Kubernetes&lt;/mark&gt; and &lt;mark&gt;Databricks&lt;/mark&gt;
-    I have experiences on &lt;mark&gt;Azure&lt;/mark&gt; and &lt;mark&gt;GCP&lt;/mark&gt; as well as &lt;mark&gt;Scala&lt;/mark&gt;, &lt;mark&gt;Neo4j&lt;/mark&gt; and &lt;mark&gt;MongoDB&lt;/mark&gt;
-    I like to dabble in &lt;mark&gt;Rust&lt;/mark&gt; and &lt;mark&gt;TLA&lt;/mark&gt;
+    I am most proficient at: AWS, Python, PostgreSQL, Kubernetes and Databricks
+    I have experiences on Azure and GCP as well as Scala, Neo4j and MongoDB
+    I like to dabble in Rust and TLA
     </about_me>
     <projects>
         <project>
@@ -33,27 +34,27 @@
                 <url>https://boitepostale.cdemonchy.com/</url>
                 <link_text>Demo</link_text>
             </website>
-            <github>
-                <url>https://github.com/knil-sama/boite_postale</url>
+            <Github>
+                <url>https://Github.com/knil-sama/boite_postale</url>
                 <link_text>repository Boite postale</link_text>
-            </github>
-            <description>Fetch open data from french government using &lt;mark&gt;python&lt;/mark&gt; to deploy an interactive map in &lt;mark&gt;Folium&lt;/mark&gt; on &lt;mark&gt;AWS&lt;/mark&gt; with &lt;mark&gt;Github Actions&lt;/mark&gt;</description>
+            </Github>
+            <description>Fetch open data from french government using Python to deploy an interactive map in Folium on AWS with Github Actions</description>
         </project>
         <project>
             <title>Rubbersearch</title>
-            <github>
-                <url>https://github.com/knil-sama/rubbersearch</url>
+            <Github>
+                <url>https://Github.com/knil-sama/rubbersearch</url>
                 <link_text>repository Rubbersearch</link_text>
-            </github>
+            </Github>
             <description>Rust code that processes a local file to expose data using a REST API</description>
         </project>
         <project>
             <title>ITM</title>
-            <github>
-                <url>https://github.com/knil-sama/itm</url>
+            <Github>
+                <url>https://Github.com/knil-sama/itm</url>
                 <link_text>repository for ITM</link_text>
-            </github>
-            <description>Shows how to run an &lt;mark&gt;airflow&lt;/mark&gt; workflow  in &lt;mark&gt;Python&lt;/mark&gt;, distibuted with &lt;mark&gt;Flower&lt;/mark&gt; &amp; &lt;mark&gt;Celery&lt;/mark&gt; to process images, extracting metadata before storing it in a &lt;mark&gt;MongoDB&lt;/mark&gt; database,&lt;br/&gt;
+            </Github>
+            <description>Shows how to run an airflow workflow  in Python, distibuted with Flower and Celery to process images, extracting metadata before storing it in a MongoDB database,&lt;br/&gt;
             there are some failures that will randomly appear when running the workflow to show how airflow handles it 
             </description>
         </project>
@@ -69,11 +70,12 @@
             <start_date>2025-04-02</start_date>
             <end_date>2025-10-07</end_date>
             <description>In a team responsible for exposition and anonymization of production tables&lt;br/&gt;
-            -Change Data Capture of relational database to iceberg table using Debezium&lt;br/&gt;
+            -Change Data Capture of relational database to Iceberg table using Debezium&lt;br/&gt;
             -Create mirror tables with Pyspark job on EMR serverless&lt;br/&gt;
             -Create and maintain dataset on google cloud using Crossplane and Kopf&lt;br/&gt;
             -Install resources on GKE using Argocd
             </description>
+            <location>Levallois-Perret</location>
         </experience>
         <experience>      
             <company>
@@ -86,19 +88,20 @@
             <end_date>2025-03-31</end_date>
             <description>In a team responsible for working with electric vehicle supply equipment (EVSE) and exposing 
             it with REST API for multiple BtB companies&lt;br/&gt;
-            -Migration of data workflow from Azure synapse to AWS databricks&lt;br/&gt;
+            -Migration of data workflow from Azure synapse to AWS Databricks&lt;br/&gt;
             -Writing CI job using Github Actions and Databricks bundle&lt;br/&gt;
             -Using unity catalog to provide external access to dataset for services like PowerBi&lt;br/&gt;
             -Usage of DLT table for streaming dataset&lt;br/&gt;
             -Setting test for spark on dev machines to improve feedback&lt;br/&gt;
-            -Managing AWS &amp; Databricks resources using terraform (tagging, creation, deletion)&lt;br/&gt;
-            -Define alerts based on Lambda metrics using cloudwatch&lt;br/&gt;
-            -Expose metrics of data workflow with PostgreSQL Aurora and grafana&lt;br/&gt;
+            -Managing AWS and Databricks resources using Terraform (tagging, creation, deletion)&lt;br/&gt;
+            -Define alerts based on Lambda metrics using Cloudwatch&lt;br/&gt;
+            -Expose metrics of data workflow with PostgreSQL Aurora and Grafana&lt;br/&gt;
             -Documentation on workflow using Mermaid on Github&lt;br/&gt;
             -Analyzing and reducing cost on Azure and AWS, for example by  dividing cost by 5 for AWS Lambda     
             exploiting caching between service and improving batching of SQS elements&lt;br/&gt;
             -Optimize geolocalization operation on PostgreSQL and detect invalid coordinates
             </description>
+            <location>Paris 2ème arrondissement</location>
         </experience>
         <experience>
             <company>
@@ -111,12 +114,12 @@
             <end_date>2023-07-01</end_date>
             <description>I was responsible for a 4 person team of 3 Data engineers and 1 ML engineer at Skillup, an SaaS helping RH in the company to provide a better experience providing training for their employees and evaluating impact.&lt;br/&gt;
             The team had a broad scope covering 4 principle subjects&lt;br/&gt;
-            -External data flux from customer with client import (user, booked training, …) &amp; export (training evaluation)&lt;br/&gt;
-            -Scrapping &amp; cleaning training website for our catalog&lt;br/&gt;
-            -Provide internal metrics &amp; dashboard so products team can gain insights&lt;br/&gt;
+            -External data flux from customer with client import (user, booked training, …) and export (training evaluation)&lt;br/&gt;
+            -Scrapping and cleaning training website for our catalog&lt;br/&gt;
+            -Provide internal metrics and dashboard so products team can gain insights&lt;br/&gt;
             -Use latest AI technologies (LLM) to implement new feature for customer&lt;br/&gt;
-            My first task when starting here was to put in place a CI/CD using github action to structure coding practice with automated testing and linting.&lt;br/&gt;
-            All the while implementing team's rituals (postmortem, retrospective, daily, ownership rotation) as well as mentoring &amp; pairing to share best coding practice (ruff, pydantic, pytest, …).&lt;br/&gt;
+            My first task when starting here was to put in place a CI/CD using Github Actions to structure coding practice with automated testing and linting.&lt;br/&gt;
+            All the while implementing team's rituals (postmortem, retrospective, daily, ownership rotation) as well as mentoring and pairing to share best coding practice (Ruff, Pydantic, Pytest, …).&lt;br/&gt;
             This allowed  us to refactor existing code more easily and made the team more resilient with people being able to work on other team member code.&lt;br/&gt;
             The scrapping project required migration of Airflow orchestrated data pipelines that use Zyte for scrapping online training websites and extracting data using NLP models.&lt;br/&gt;
             The frontend of Skillup being developed in Typescript we rely on GRPC API to interact with their system.&lt;br/&gt;
@@ -125,6 +128,7 @@
             For the dashboarding we wanted to give a lot of autonomy for no tech savvy user and deployed both Metabase and Superset.&lt;br/&gt;
             For the IA related project we needed to do some optimisation of OpenIA POC for generation of job's skills based on role title
             </description>
+            <location>Paris 10ème arrondissement</location>
         </experience>
         <experience>
             <company>
@@ -139,11 +143,11 @@
             <description>
             I was the first data engineer of a growing team of data scientists (5 to 7 people) that worked exclusively on state of the art machine learning for customer and internal needs.&lt;br/&gt;
             We got a separate AWS account and a dedicated kubernetes namespace for our dev environment, as we were the first to do machine learning at Talend so a lot of new processes needed to be put in place.&lt;br/&gt;
-            In this context the first months were used to document and set guidelines for coding, testing, packaging and deployment using Github action and Jenkins.&lt;br/&gt;
+            In this context the first months were used to document and set guidelines for coding, testing, packaging and deployment using Github Actions and Jenkins.&lt;br/&gt;
             We experimented with multiple platforms to deliver our solutions&lt;br/&gt;
-            -Data pipeline on Databricks with Scala and Python (Pyspark &amp; Koala) to feed ML prediction models&lt;br/&gt;
-            -Deployment and optimisation of models to detect anomalies in customer’s jobs in python &amp; Flask&lt;br/&gt;
-            -Extraction using Talend studio job(Java) to dump postgresql database on s3 bucket as parquet&lt;br/&gt;
+            -Data pipeline on Databricks with Scala and Python (Pyspark and Koala) to feed ML prediction models&lt;br/&gt;
+            -Deployment and optimisation of models to detect anomalies in customer’s jobs in Python and Flask&lt;br/&gt;
+            -Extraction using Talend studio job(Java) to dump PostgreSQL database on S3 bucket as parquet&lt;br/&gt;
             -Extraction and computation on a Snowflake datawarehouse&lt;br/&gt;
             We finally settled on Sagemaker for most of our projects and my role included finops responsibilities&lt;br/&gt;
             -Managing AWS account resources using terraform (tagging, creation, deletion)&lt;br/&gt;
@@ -151,6 +155,7 @@
             -Evaluation and optimisation regarding architecture of Sagemaker pipeline, model and endpoint on AWS&lt;br/&gt;
             Other responsibilities included making people more aware of security with presentation, training on secureflag platform and setting audit tools in the CI with veracode.
             </description>
+            <location>Suresnes</location>
         </experience>
         <experience>
             <company>
@@ -171,6 +176,7 @@
             Main project beside that was deploying the backbone of our data stack with a Kafka that allowed us to  stream our production database (MySQL) to our Postgresql using Debezium and change data capture patterns.&lt;br/&gt;
             We then loaded it into our datawarehouse (Redshift) that give data analyst opportunity to do realtime dashboard of backend activity
             </description>
+            <location>Paris 9ème arrondissement</location>
         </experience>
         <experience>
             <company>
@@ -184,10 +190,11 @@
             <end_date>2017-08-01</end_date>
             <description>
             Alongside another data engineer we exploring multiple projects to resolve issue encountered by marketing and research teams sharing progress during spring (3 weeks) for Ipsen an pharmaceutical company&lt;br/&gt;
-            The two most advanced projects are listed below and all of them were hosted on AWS ec2 using docker-compose.&lt;br/&gt;
+            The two most advanced projects are listed below and all of them were hosted on AWS EC2 using docker-compose.&lt;br/&gt;
             -Team's responsible for handling clinical trials of new drugs needed insight on previous research done by other companies in the whole world, so we did data mining on official reports for specific diseases, cross referenced the sources then displayed it on an interactive map using Folium, we ended up pushing some fix to folium.&lt;br/&gt;
             -Marketing wanted to get feedback regarding new medicines on social media so we targeted tweets related to either the disease or drug,  developed an algorithm to identify key opinion leaders (either medical professional or public personality) then used nlp tools to do sentiment analysis.&lt;br/&gt;
             </description>
+            <location>Issy Les Moulineaux</location>
         </experience>
         <experience>
             <company>
@@ -209,8 +216,9 @@
             -Fix customer addresses using google maps data and apache Lucene&lt;br/&gt;
             This project was successfully deployed and is still in production.&lt;br/&gt;
             GDF 360:&lt;br/&gt;
-            To help desk support of Engie to provide better service to customers we implemented a POC in 6 months that displayed all known previous interactions between a customer and the company (call, bills, contract, …) using a graph database (neo4j) on a temporal axis.&lt;br/&gt;
+            To help desk support of Engie to provide better service to customers we implemented a POC in 6 months that displayed all known previous interactions between a customer and the company (call, bills, contract, …) using a graph database (Neo4j) on a temporal axis.&lt;br/&gt;
             </description>
+            <location>La Défense</location>
         </experience>
     </experiences>
 

@@ -1,10 +1,16 @@
-mod xml_struct;
-mod yaml_struct;
 
+mod askama_struct;
+mod yaml_struct;
+mod xml_struct;
+pub mod naive_date_format;
 pub use crate::xml_struct::{Resume};
 pub use crate::yaml_struct::{Config, Sass, ContentWrapper, ContentDetail, AdditionalLink, LayoutDetail};
+pub use crate::askama_struct::{LatexResume, Experience, Company};
 use serde_xml_rs::from_reader;
 use std::{fs::File};
+use askama::Template; // bring trait in scope
+use std::io::Write;
+use regex::Regex;
 
 fn parse_xml_file(xml_filepath: String) -> Resume {
     let file = File::open(xml_filepath).unwrap();
@@ -22,7 +28,7 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
         .map(|project| ContentDetail{
             title: project.title,
             layout: LayoutDetail::TopMiddle,
-            description: project.description,
+            description: highlight_skill(project.description, TypeHighlight::Markown),
             link: project.website.as_ref().map(|website| website.url.clone()),
             link_text: project.website.as_ref().map(|website| website.link_text.clone()),
             additional_links: project.github.as_ref().map(|github|
@@ -45,7 +51,7 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
             quote: Some(experience.company.description),
             sub_title: Some(experience.role),
             caption: Some(experience.start_date.format("%Y").to_string() + " - " + &experience.end_date.format("%Y").to_string()),
-            description: experience.description,
+            description: highlight_skill(experience.description, TypeHighlight::Markown),
         ..Default::default()
         }).collect(),
     ..Default::default()
@@ -71,7 +77,7 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
         github_username: xml_resume.online.github_username,
         linkedin_username: xml_resume.online.linkedin_username,
         about_profile_image: xml_resume.personal.profile_pic,
-        about_content: xml_resume.about_me,
+        about_content: highlight_skill(xml_resume.about_me, TypeHighlight::Markown),
         content,
         footer_show_references: true,
         references_title: "References on request".to_string(),
@@ -95,7 +101,65 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
     let output = File::create("./_config.yml").unwrap();
     let _ = serde_yaml_ng::to_writer(output,&yaml_config);
 }
+enum TypeHighlight {
+    Latex,
+    Markown
+}
+fn highlight_skill(content: String, type_highlight: TypeHighlight) -> String {
+    let match_skill = Regex::new(r"(?<skill>\|REST|API|Github|Actions|Kafka|Spark|Pyspark|Airflow|Rust|TLA|Python|Scala|AWS|GCP|Azure|Databricks|Snowflake|Synapse|PostgreSQL|MongoDB|Neo4j|GKE|EC2|ECS|EMR|Cloudwatch|Lambda|S3|Redshift|Kubernetes|Argocd|Kopf|Debezium|Crossplane|Iceberg|Terraform|Flask|Aurora|Grafana|Ruff|Pydantic|Pytest)").unwrap();    
+    match_skill.replace_all(&content, match type_highlight {
+        TypeHighlight::Latex => "\\textbf{$skill}",
+        TypeHighlight::Markown => "**$skill**"
+    }).to_string()
+}
+
+fn format_line_break(content: String, type_highlight: TypeHighlight) -> String {
+    let match_skill = Regex::new(r"(?<line_break><br/>)").unwrap();
+        match_skill.replace_all(&content, match type_highlight {
+        TypeHighlight::Latex => "\\\\",
+        TypeHighlight::Markown => "<br/>"
+    }).to_string()
+}   
+
+
+fn generate_latex_file(xml_resume: Resume, _rendered_template_filepath: String) {
+    let latex_resume = LatexResume {
+        firstname: xml_resume.personal.firstname,
+        lastname: xml_resume.personal.lastname,
+        email: xml_resume.personal.email,
+        linkedin: xml_resume.online.linkedin_username,
+        github: xml_resume.online.github_username,
+        role: xml_resume.personal.title,
+        portofolio_name: xml_resume.online.website,
+        objective: format_line_break(highlight_skill(xml_resume.about_me, TypeHighlight::Latex), TypeHighlight::Latex),
+        experiences: xml_resume.experiences.into_iter().map(|experience| askama_struct::Experience{ 
+            company: askama_struct::Company {
+                name: experience.company.name,
+                url: experience.company.url,
+                description: experience.company.description
+            },
+            role: experience.role,
+            start_date: experience.start_date,
+            end_date: experience.end_date,
+            description: format_line_break(highlight_skill(experience.description, TypeHighlight::Latex), TypeHighlight::Latex),
+            location: experience.location
+        }).collect(),
+        education: askama_struct::Education {
+            title: xml_resume.education.title,
+            university: xml_resume.education.university,
+            description: xml_resume.education.description,
+            start_date: xml_resume.education.start_date,
+            end_date: xml_resume.education.end_date
+        }
+     }; // instantiate your struct
+    println!("{}", latex_resume.render().unwrap()); // then render it.
+    let mut output = File::create("./resume.tex").unwrap();
+    let _ = write!(output, "{}", latex_resume.render().unwrap());
+
+}
+
 fn main() {
     let xml_resume = parse_xml_file("src/resume.xml".to_string());
-    generate_yaml_config_from_xml_resume(xml_resume);
+    generate_yaml_config_from_xml_resume(xml_resume.clone());
+    generate_latex_file(xml_resume, "resume.tex".to_string());
 }   

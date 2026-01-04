@@ -1,37 +1,10 @@
 use serde::Deserialize;
 use url::{Url};
 use chrono::NaiveDate;
+use serde_email::Email;
+pub use crate::naive_date_format;
 
-
-// from https://dev.to/thiagomg/another-way-to-deserialise-datetime-in-rust-kja
-mod naive_date_format {  
-    use chrono::NaiveDate;  
-    use serde::{self, Deserialize, Deserializer, Serializer};  
-
-    const FORMAT: &str = "%Y-%m-%d";  
-
-    /// Transforms a NaiveDate into a String
-    #[allow(dead_code)]
-    pub fn serialize<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error>
-        where
-            S: Serializer,
-    {  
-        let s = date.format(FORMAT).to_string();
-        serializer.serialize_str(&s)
-    }
-
-    /// Transforms a String into a NaiveDate
-    pub fn deserialize<'de, D>(deserializer: D) -> Result<NaiveDate, D::Error>  
-        where
-            D: Deserializer<'de>,
-    {
-        let s = String::deserialize(deserializer)?;
-        NaiveDate::parse_from_str(&s, FORMAT).map_err(serde::de::Error::custom)
-    }
-}
-
-
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Resume {
     pub personal: Personal,
     pub online: Online,
@@ -41,22 +14,23 @@ pub struct Resume {
     pub education: Education
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Personal {
     pub firstname: String,
     pub lastname: String,
     pub title: String,
-    pub profile_pic: String
+    pub profile_pic: String,
+    pub email: Email
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Online {
     pub website: String,
     pub github_username: String,
     pub linkedin_username: String
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Projects {
     // see this issue on why we need intermediate structure https://github.com/RReverser/serde-xml-rs/issues/243
     #[serde(default, rename = "project")]
@@ -73,7 +47,7 @@ impl IntoIterator for Projects {
     }
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Project {
     pub title: String,
     pub website: Option<Website>,
@@ -81,20 +55,20 @@ pub struct Project {
     pub description: String,
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Website {
     pub url: Url,
     pub link_text: String
 }
 
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Github {
     pub url: Url,
     pub link_text: String
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Experiences {
     // see this issue on why we need intermediate structure https://github.com/RReverser/serde-xml-rs/issues/243
     #[serde(default, rename = "experience")]
@@ -111,7 +85,7 @@ impl IntoIterator for Experiences {
     }
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Experience {
     pub company: Company,
     pub role: String,
@@ -119,18 +93,19 @@ pub struct Experience {
     pub start_date: NaiveDate,
     #[serde(with = "naive_date_format")]
     pub end_date: NaiveDate,
-    pub description: String
+    pub description: String,
+    pub location: String
 }
 
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Company {
     pub name: String,
     pub url: Url,
     pub description: String
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Deserialize)]
 pub struct Education {
     pub title: String,
     pub university: String,
