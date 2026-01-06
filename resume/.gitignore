@@ -7,4 +7,4 @@ Gemfile.lock
 debug
 target
 # secret for connecting to website
-.secrets
+.secrets.toml
