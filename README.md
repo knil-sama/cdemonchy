@@ -10,7 +10,7 @@ deployed on https://cdemonchy.com/
 
 ```bash
 cd resume
-docker compose up --build
+docker compose up --build jekyll
 ```
 
 Open your browser to http://localhost:4000

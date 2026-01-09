@@ -5,8 +5,8 @@ use serde::{self, Deserialize, Deserializer, Serializer};
 
 const FORMAT: &str = "%Y-%m-%d";  
 
-/// Transforms a NaiveDate into a String
-#[allow(dead_code)]
+/// Transforms a `NaiveDate` into a String
+#[allow(dead_code,clippy::missing_errors_doc)]
 pub fn serialize<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: Serializer,
@@ -15,7 +15,8 @@ pub fn serialize<S>(date: &NaiveDate, serializer: S) -> Result<S::Ok, S::Error>
     serializer.serialize_str(&s)
 }
 
-/// Transforms a String into a NaiveDate
+/// Transforms a String into a `NaiveDate`
+#[allow(clippy::missing_errors_doc)]
 pub fn deserialize<'de, D>(deserializer: D) -> Result<NaiveDate, D::Error>  
     where
         D: Deserializer<'de>,

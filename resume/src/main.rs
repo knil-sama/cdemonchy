@@ -11,6 +11,9 @@ use std::{fs::File};
 use askama::Template; // bring trait in scope
 use std::io::Write;
 use regex::Regex;
+use serde::Deserialize;
+use thirtyfour::prelude::*;
+use std::time::Duration;
 
 fn parse_xml_file(xml_filepath: String) -> Resume {
     let file = File::open(xml_filepath).unwrap();
@@ -28,7 +31,7 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
         .map(|project| ContentDetail{
             title: project.title,
             layout: LayoutDetail::TopMiddle,
-            description: highlight_skill(project.description, TypeHighlight::Markown),
+            description: highlight_skill(&project.description, &TypeHighlight::Markown),
             link: project.website.as_ref().map(|website| website.url.clone()),
             link_text: project.website.as_ref().map(|website| website.link_text.clone()),
             additional_links: project.github.as_ref().map(|github|
@@ -50,8 +53,8 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
             link: Some(experience.company.url),
             quote: Some(experience.company.description),
             sub_title: Some(experience.role),
-            caption: Some(experience.start_date.format("%Y").to_string() + " - " + &experience.end_date.format("%Y").to_string()),
-            description: highlight_skill(experience.description, TypeHighlight::Markown),
+            caption: Some(format!("{} - {}", experience.start_date.format("%Y"), experience.end_date.format("%Y"))),
+            description: highlight_skill(&experience.description, &TypeHighlight::Markown),
         ..Default::default()
         }).collect(),
     ..Default::default()
@@ -62,7 +65,7 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
             title: xml_resume.education.university,
             layout: LayoutDetail::TopLeft,
             sub_title: Some(xml_resume.education.title),
-            caption: Some(xml_resume.education.start_date.format("%Y").to_string() + " - " + &xml_resume.education.end_date.format("%Y").to_string()),
+            caption: Some(format!("{} - {}", xml_resume.education.start_date.format("%Y"), xml_resume.education.end_date.format("%Y"))),
             description: xml_resume.education.description,
             ..Default::default()
         }],
@@ -72,12 +75,12 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
     let yaml_config: Config = Config{
         repository: "knil-sama/cdemonchy".to_string(),
         version: 2,
-        name: xml_resume.personal.firstname + " " + &xml_resume.personal.lastname,
+        name: format!("{} {}",xml_resume.personal.firstname, xml_resume.personal.lastname),
         title: xml_resume.personal.title,
         github_username: xml_resume.online.github_username,
         linkedin_username: xml_resume.online.linkedin_username,
         about_profile_image: xml_resume.personal.profile_pic,
-        about_content: highlight_skill(xml_resume.about_me, TypeHighlight::Markown),
+        about_content: highlight_skill(&xml_resume.about_me, &TypeHighlight::Markown),
         content,
         footer_show_references: true,
         references_title: "References on request".to_string(),
@@ -105,17 +108,17 @@ enum TypeHighlight {
     Latex,
     Markown
 }
-fn highlight_skill(content: String, type_highlight: TypeHighlight) -> String {
+fn highlight_skill(content: &str, type_highlight: &TypeHighlight) -> String {
     let match_skill = Regex::new(r"(?<skill>\|REST|API|Github|Actions|Kafka|Spark|Pyspark|Airflow|Rust|TLA|Python|Scala|AWS|GCP|Azure|Databricks|Snowflake|Synapse|PostgreSQL|MongoDB|Neo4j|GKE|EC2|ECS|EMR|Cloudwatch|Lambda|S3|Redshift|Kubernetes|Argocd|Kopf|Debezium|Crossplane|Iceberg|Terraform|Flask|Aurora|Grafana|Ruff|Pydantic|Pytest)").unwrap();    
-    match_skill.replace_all(&content, match type_highlight {
+    match_skill.replace_all(content, match type_highlight {
         TypeHighlight::Latex => "\\textbf{$skill}",
         TypeHighlight::Markown => "**$skill**"
     }).to_string()
 }
 
-fn format_line_break(content: String, type_highlight: TypeHighlight) -> String {
+fn format_line_break(content: &str, type_highlight: &TypeHighlight) -> String {
     let match_skill = Regex::new(r"(?<line_break><br/>)").unwrap();
-        match_skill.replace_all(&content, match type_highlight {
+        match_skill.replace_all(content, match type_highlight {
         TypeHighlight::Latex => "\\\\",
         TypeHighlight::Markown => "<br/>"
     }).to_string()
@@ -131,7 +134,7 @@ fn generate_latex_file(xml_resume: Resume, _rendered_template_filepath: String) 
         github: xml_resume.online.github_username,
         role: xml_resume.personal.title,
         portofolio_name: xml_resume.online.website,
-        objective: format_line_break(highlight_skill(xml_resume.about_me, TypeHighlight::Latex), TypeHighlight::Latex),
+        objective: format_line_break(&highlight_skill(&xml_resume.about_me, &TypeHighlight::Latex), &TypeHighlight::Latex),
         experiences: xml_resume.experiences.into_iter().map(|experience| askama_struct::Experience{ 
             company: askama_struct::Company {
                 name: experience.company.name,
@@ -141,7 +144,7 @@ fn generate_latex_file(xml_resume: Resume, _rendered_template_filepath: String) 
             role: experience.role,
             start_date: experience.start_date,
             end_date: experience.end_date,
-            description: format_line_break(highlight_skill(experience.description, TypeHighlight::Latex), TypeHighlight::Latex),
+            description: format_line_break(&highlight_skill(&experience.description, &TypeHighlight::Latex), &TypeHighlight::Latex),
             location: experience.location
         }).collect(),
         education: askama_struct::Education {
@@ -158,8 +161,75 @@ fn generate_latex_file(xml_resume: Resume, _rendered_template_filepath: String) 
 
 }
 
-fn main() {
-    let xml_resume = parse_xml_file("src/resume.xml".to_string());
-    generate_yaml_config_from_xml_resume(xml_resume.clone());
-    generate_latex_file(xml_resume, "resume.tex".to_string());
+async fn malt_update() -> WebDriverResult<()> {
+    println!("dafuk");
+    let config: TomlConfig = toml::from_str(&std::fs::read_to_string("src/.secrets.toml").unwrap()).unwrap();
+    let caps = DesiredCapabilities::chrome();
+    let server_url = "http://localhost:4444";
+    println!("dafuk4");
+    let driver = WebDriver::new(server_url, caps).await?;
+    println!("dafuk3");
+    driver.goto(format!("{}/signin", config.malt.url)).await?;
+    println!("goto signin");
+    assert_eq!("Connexion à Malt", driver.title().await?);
+    let elem_form_email = driver.find(By::Id("email")).await?;
+    let elem_form_password = driver.find(By::Id("password")).await?;
+    elem_form_email.send_keys(config.malt.username).await?;
+    elem_form_password.send_keys(config.malt.password).await?;
+    println!("form ?");
+    // form.submit().await?;
+    // println!("submitted ?");
+    let elem_button = driver.find(By::Css("button[type='submit']")).await?;
+    println!("found button");
+    elem_button.click().await?;
+    println!("after click");
+    println!("Button disappeared ? {}", driver.query(By::Css("button[type='submit']")).wait(Duration::from_secs(10), Duration::from_secs(1)).not_exists().await?);
+
+//     let form = driver.find(By::Id("signin-form")).await?;
+//     println!("found form");
+//     let error = form.find(By::ClassName("joy-form-error")).await?;
+//     println!("{:?}", error);
+//     while driver.title().await? == "Connexion à Malt" {
+//         println!("waiting")
+//     }
+//     // while elem_button.is_present().await? {
+//     //     println!("waiting");
+//     // } // wait for signin page to be stale
+//     println!("loaded ?");
+//     driver.goto(format!("{}/profile", config.malt.url)).await?;
+// //      // Look for header to implicitly wait for the page to load.
+    println!("is logged ?");
+    driver.goto(format!("{}/profile", config.malt.url)).await?;
+    println!("{}", driver.title().await?);
+    println!("{:?}",driver.find(By::ClassName("profile-headline-read-fullname")).await?.value().await.unwrap().ok_or("Not found"));
+    
+//      assert_eq!(driver.title().await?, "Selenium - Wikipedia");
+
+//      // Always explicitly close the browser.
+    driver.quit().await?;
+
+   Ok(())
+ }
+
+#[derive(Deserialize)]
+struct TomlConfig {
+   malt: SiteConfig,
+}
+
+#[derive(Deserialize)]
+struct SiteConfig {
+   url: String,
+   username: String,
+   password: String,
+}
+#[tokio::main]
+async fn main() {
+    println!("start main");
+    let malt_updated = malt_update();
+    let _ = malt_updated.await;
+    println!("end main");
+    //let xml_resume = parse_xml_file("src/resume.xml".to_string());
+    //generate_yaml_config_from_xml_resume(xml_resume.clone());
+    //generate_latex_file(xml_resume, "resume.tex".to_string());
+
 }   
