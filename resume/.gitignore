@@ -8,3 +8,7 @@ debug
 target
 # secret for connecting to website
 .secrets.toml
+resume.aux
+resume.log
+resume.out
+resume.pdf
