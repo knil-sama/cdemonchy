@@ -155,28 +155,22 @@ fn generate_latex_file(xml_resume: Resume, _rendered_template_filepath: String) 
             end_date: xml_resume.education.end_date
         }
      }; // instantiate your struct
-    println!("{}", latex_resume.render().unwrap()); // then render it.
     let mut output = File::create("./resume.tex").unwrap();
     let _ = write!(output, "{}", latex_resume.render().unwrap());
 
 }
 
 async fn malt_update() -> WebDriverResult<()> {
-    println!("dafuk");
     let config: TomlConfig = toml::from_str(&std::fs::read_to_string("src/.secrets.toml").unwrap()).unwrap();
     let caps = DesiredCapabilities::chrome();
     let server_url = "http://localhost:4444";
-    println!("dafuk4");
     let driver = WebDriver::new(server_url, caps).await?;
-    println!("dafuk3");
     driver.goto(format!("{}/signin", config.malt.url)).await?;
-    println!("goto signin");
     assert_eq!("Connexion à Malt", driver.title().await?);
     let elem_form_email = driver.find(By::Id("email")).await?;
     let elem_form_password = driver.find(By::Id("password")).await?;
     elem_form_email.send_keys(config.malt.username).await?;
     elem_form_password.send_keys(config.malt.password).await?;
-    println!("form ?");
     // form.submit().await?;
     // println!("submitted ?");
     let elem_button = driver.find(By::Css("button[type='submit']")).await?;
@@ -225,11 +219,10 @@ struct SiteConfig {
 #[tokio::main]
 async fn main() {
     println!("start main");
-    let malt_updated = malt_update();
-    let _ = malt_updated.await;
+    //let malt_updated = malt_update();
+    //let _ = malt_updated.await;
+    let xml_resume = parse_xml_file("src/resume.xml".to_string());
+    generate_yaml_config_from_xml_resume(xml_resume.clone());
+    generate_latex_file(xml_resume, "resume.tex".to_string());
     println!("end main");
-    //let xml_resume = parse_xml_file("src/resume.xml".to_string());
-    //generate_yaml_config_from_xml_resume(xml_resume.clone());
-    //generate_latex_file(xml_resume, "resume.tex".to_string());
-
 }   

@@ -10,7 +10,13 @@ services:
       - "4000:4000"
     command: bundle exec jekyll serve --host 0.0.0.0 --watch
 
-
+  latex:
+    image: texlive/texlive:latest
+    build:
+      context: .
+    volumes:
+      - .:/usr/src/app
+    command: pdflatex -output-directory=/usr/src/app /usr/src/app/resume.tex
   chrome:
     image: selenium/node-chrome:4.39.0-20251212
     platform: linux/amd64
