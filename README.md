@@ -1,6 +1,12 @@
 # cdemonchy
 main access to public online project
 
+## Requisite
+
+Install [docker](https://www.docker.com/get-started/)
+Install [npm](https://www.npmjs.com/)
+To run commands install [just](https://github.com/casey/just)
+
 ## CV
 
 Template from https://github.com/sproogen/modern-resume-theme
@@ -9,26 +15,31 @@ deployed on https://cdemonchy.com/
 ### local run
 
 ```bash
-cd resume
-docker compose up --build jekyll
+just website_run
 ```
 
 Open your browser to http://localhost:4000
 
 ## Blog
 
-### Run docusaurus locally
+### Install dependencies
+
+Run only once
 
 ```bash
-cd blog/website
-npm start
+just docusaurus_install
 ```
 
-### Build docusaurus
+### Build blog
 
 ```bash
-cd blog/website
-npm run build
+just blog_build
+```
+
+### Run blog locally
+
+```bash
+just blog_run
 ```
 
 # Workflow
