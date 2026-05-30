@@ -9,3 +9,10 @@ blog_build:
 
 blog_run:
     cd blog/website && npm start
+
+resume_build:
+    cd resume && cargo run
+
+resume_pdf:
+    # TODO Should use a dedicaed image dockerfile to use correct user
+    cd resume && docker compose up latex && sudo chown cdemonchy:cdemonchy resume.pdf

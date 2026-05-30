@@ -1,9 +1,3 @@
 # Generating CV
 
-```bash
-cargo run
-```
-
-```bash
-docker compose up latex
-```
+Read xml and produce latex file
