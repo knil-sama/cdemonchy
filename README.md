@@ -3,13 +3,13 @@ main access to public online project
 
 ## Requisite
 
-Install [docker](https://www.docker.com/get-started/)
-Install [npm](https://www.npmjs.com/)
+Install [docker](https://www.docker.com/get-started/)  
+Install [npm](https://www.npmjs.com/)  
 To run commands install [just](https://github.com/casey/just)
 
 ## CV
 
-Template from https://github.com/sproogen/modern-resume-theme
+Template from https://github.com/sproogen/modern-resume-theme  
 deployed on https://cdemonchy.com/
 
 ### local run
