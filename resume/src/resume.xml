@@ -1,4 +1,4 @@
-<?xml version="1.0"?> 
+<?xml version="1.0"?>
 <resume>
     <personal>
         <firstname>Clement</firstname>
@@ -55,11 +55,27 @@
                 <link_text>repository for ITM</link_text>
             </Github>
             <description>Shows how to run an airflow workflow  in Python, distibuted with Flower and Celery to process images, extracting metadata before storing it in a MongoDB database,&lt;br/&gt;
-            there are some failures that will randomly appear when running the workflow to show how airflow handles it 
+            there are some failures that will randomly appear when running the workflow to show how airflow handles it
             </description>
         </project>
     </projects>
     <experiences>
+        <experience>
+            <company>
+                <name>Leboncoin</name>
+                <url>https://leboncoin.fr</url>
+                <description>Doctolib is a classified ads website for B2B and C2C</description>
+            </company>
+            <role>Data Engineer</role>
+            <start_date>2026-03-19</start_date>
+            <end_date>2026-12-31</end_date>
+            <description>In a team responsible for the migration of all datasets to Databricks&lt;br/&gt;
+            -Identify and extract all sql codes from Airflow pipeline and notebook for analysis using Lakebridge&lt;br/&gt;
+            -Export billing informations from Databricks system tables to monitor cost&lt;br/&gt;
+            -Create dashboard and monitor in Datadog based on pipeline metrics&lt;br/&gt;
+            </description>
+            <location>Levallois-Perret</location>
+        </experience>
         <experience>
             <company>
                 <name>Doctolib</name>
@@ -77,7 +93,7 @@
             </description>
             <location>Levallois-Perret</location>
         </experience>
-        <experience>      
+        <experience>
             <company>
                 <name>Be:mo (at TotalEnergies)</name>
                 <url>https://www.be-mo.io</url>
@@ -86,7 +102,7 @@
             <role>Data Engineer</role>
             <start_date>2023-10-01</start_date>
             <end_date>2025-03-31</end_date>
-            <description>In a team responsible for working with electric vehicle supply equipment (EVSE) and exposing 
+            <description>In a team responsible for working with electric vehicle supply equipment (EVSE) and exposing
             it with REST API for multiple BtB companies&lt;br/&gt;
             -Migration of data workflow from Azure synapse to AWS Databricks&lt;br/&gt;
             -Writing CI job using Github Actions and Databricks bundle&lt;br/&gt;
@@ -97,7 +113,7 @@
             -Define alerts based on Lambda metrics using Cloudwatch&lt;br/&gt;
             -Expose metrics of data workflow with PostgreSQL Aurora and Grafana&lt;br/&gt;
             -Documentation on workflow using Mermaid on Github&lt;br/&gt;
-            -Analyzing and reducing cost on Azure and AWS, for example by  dividing cost by 5 for AWS Lambda     
+            -Analyzing and reducing cost on Azure and AWS, for example by  dividing cost by 5 for AWS Lambda
             exploiting caching between service and improving batching of SQS elements&lt;br/&gt;
             -Optimize geolocalization operation on PostgreSQL and detect invalid coordinates
             </description>
@@ -228,5 +244,5 @@
         <description>Main focus was on Java, Hadoop and SQL databases.</description>
         <start_date>2013-09-01</start_date>
         <end_date>2015-06-30</end_date>
-    </education> 
+    </education>
 </resume>

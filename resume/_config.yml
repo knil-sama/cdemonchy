@@ -39,6 +39,17 @@ content:
 - title: Experiences
   layout: list
   content:
+  - title: Leboncoin
+    layout: left
+    link: https://leboncoin.fr/
+    sub_title: Data Engineer
+    quote: Doctolib is a classified ads website for B2B and C2C
+    caption: 2026 - 2026
+    description: |-
+      In a team responsible for the migration of all datasets to **Databricks**<br/>
+                  -Identify and extract all sql codes from **Airflow** pipeline and notebook for analysis using Lakebridge<br/>
+                  -Export billing informations from **Databricks** system tables to monitor cost<br/>
+                  -Create dashboard and monitor in Datadog based on pipeline metrics<br/>
   - title: Doctolib
     layout: left
     link: https://doctolib.fr/
@@ -57,7 +68,21 @@ content:
     sub_title: Data Engineer
     quote: Be:mo provide a B2B solutions to help recharge electric vehicule (truck and car)
     caption: 2023 - 2025
-    description: "In a team responsible for working with electric vehicle supply equipment (EVSE) and exposing \n            it with REST **API** for multiple BtB companies<br/>\n            -Migration of data workflow from **Azure** synapse to **AWS** **Databricks**<br/>\n            -Writing CI job using **Github** **Actions** and **Databricks** bundle<br/>\n            -Using unity catalog to provide external access to dataset for services like PowerBi<br/>\n            -Usage of DLT table for streaming dataset<br/>\n            -Setting test for spark on dev machines to improve feedback<br/>\n            -Managing **AWS** and **Databricks** resources using **Terraform** (tagging, creation, deletion)<br/>\n            -Define alerts based on **Lambda** metrics using **Cloudwatch**<br/>\n            -Expose metrics of data workflow with **PostgreSQL** **Aurora** and **Grafana**<br/>\n            -Documentation on workflow using Mermaid on **Github**<br/>\n            -Analyzing and reducing cost on **Azure** and **AWS**, for example by  dividing cost by 5 for **AWS** **Lambda**     \n            exploiting caching between service and improving batching of SQS elements<br/>\n            -Optimize geolocalization operation on **PostgreSQL** and detect invalid coordinates"
+    description: |-
+      In a team responsible for working with electric vehicle supply equipment (EVSE) and exposing
+                  it with REST **API** for multiple BtB companies<br/>
+                  -Migration of data workflow from **Azure** synapse to **AWS** **Databricks**<br/>
+                  -Writing CI job using **Github** **Actions** and **Databricks** bundle<br/>
+                  -Using unity catalog to provide external access to dataset for services like PowerBi<br/>
+                  -Usage of DLT table for streaming dataset<br/>
+                  -Setting test for spark on dev machines to improve feedback<br/>
+                  -Managing **AWS** and **Databricks** resources using **Terraform** (tagging, creation, deletion)<br/>
+                  -Define alerts based on **Lambda** metrics using **Cloudwatch**<br/>
+                  -Expose metrics of data workflow with **PostgreSQL** **Aurora** and **Grafana**<br/>
+                  -Documentation on workflow using Mermaid on **Github**<br/>
+                  -Analyzing and reducing cost on **Azure** and **AWS**, for example by  dividing cost by 5 for **AWS** **Lambda**
+                  exploiting caching between service and improving batching of SQS elements<br/>
+                  -Optimize geolocalization operation on **PostgreSQL** and detect invalid coordinates
   - title: Skillup
     layout: left
     link: https://skillup.co/
