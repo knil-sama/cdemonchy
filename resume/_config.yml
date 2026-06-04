@@ -49,7 +49,7 @@ content:
       In a team responsible for the migration of all datasets to **Databricks**<br/>
                   -Identify and extract all sql codes from **Airflow** pipeline and notebook for analysis using Lakebridge<br/>
                   -Export billing informations from **Databricks** system tables to monitor cost<br/>
-                  -Create dashboard and monitor in Datadog based on pipeline metrics<br/>
+                  -Create dashboard and monitor in **Datadog** based on pipeline metrics<br/>
   - title: Doctolib
     layout: left
     link: https://doctolib.fr/
