@@ -40,7 +40,7 @@ module.exports = {
     image: "img/undraw_online.svg",
     footer: {
       links: [],
-      copyright: "Copyright © 2023 cdw",
+      copyright: "Copyright © " + new Date().getFullYear() + " cdw",
       logo: {
         src: "TODO_CREATE_LOGO",
         alt: "",
