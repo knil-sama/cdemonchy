@@ -2,6 +2,7 @@ mod askama_struct;
 pub mod naive_date_format;
 mod xml_struct;
 mod yaml_struct;
+
 pub use crate::askama_struct::{Company, Experience, LatexResume};
 pub use crate::xml_struct::Resume;
 pub use crate::yaml_struct::{
@@ -15,12 +16,14 @@ use std::fs::File;
 use std::io::Write;
 use std::time::Duration;
 use thirtyfour::prelude::*;
+use url::Url;
 
 fn parse_xml_file(xml_filepath: String) -> Resume {
     let file = File::open(xml_filepath).unwrap();
     from_reader(file).unwrap()
 }
 
+#[allow(clippy::too_many_lines)]
 fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
     let sass: Sass = Sass {
         sass_dir: "_sass".to_string(),
@@ -102,6 +105,11 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
         github_username: xml_resume.online.github_username,
         linkedin_username: xml_resume.online.linkedin_username,
         about_profile_image: xml_resume.personal.profile_pic,
+        additional_links: vec![AdditionalLink {
+            title: "PDF format".to_string(),
+            icon: "fa fa-download".to_string(),
+            url: Url::parse("http://cdemonchy.com/resume.pdf").expect("Crash"),
+        }],
         about_content: highlight_skill(&xml_resume.about_me, &TypeHighlight::Markown),
         content,
         footer_show_references: true,

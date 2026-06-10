@@ -1,6 +1,6 @@
-use serde::{Serialize, Deserialize};
-use url::{Url};
+use serde::{Deserialize, Serialize};
 use serde_enum_str::{Deserialize_enum_str, Serialize_enum_str};
+use url::Url;
 
 #[derive(Default, Debug, Serialize, Deserialize)]
 pub struct Config {
@@ -12,6 +12,7 @@ pub struct Config {
     pub title: String,
     pub github_username: String,
     pub linkedin_username: String,
+    pub additional_links: Vec<AdditionalLink>,
     #[serde(default)] // False
     pub darkmode: bool,
     pub about_profile_image: String,
@@ -22,16 +23,15 @@ pub struct Config {
     pub remote_theme: String,
     pub sass: Sass,
     pub plugins: Vec<String>,
-    pub exclude : Vec<String>
+    pub exclude: Vec<String>,
 }
-
 
 #[derive(Default, Deserialize_enum_str, Serialize_enum_str, Debug, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
-pub enum LayoutWrapper { 
+pub enum LayoutWrapper {
     #[default]
-    List, 
-    Text
+    List,
+    Text,
 }
 
 #[derive(Default, Debug, Serialize, Deserialize)]
@@ -42,15 +42,14 @@ pub struct ContentWrapper {
     pub content: Vec<ContentDetail>,
 }
 
-
-
 #[derive(Default, Deserialize_enum_str, Serialize_enum_str, Debug, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
-pub enum LayoutDetail { 
+pub enum LayoutDetail {
     #[default]
-    Left, 
-    TopLeft, 
-    TopMiddle}
+    Left,
+    TopLeft,
+    TopMiddle,
+}
 
 #[serde_with::skip_serializing_none]
 #[derive(Default, Debug, Serialize, Deserialize)]
@@ -64,18 +63,18 @@ pub struct ContentDetail {
     pub quote: Option<String>,
     pub caption: Option<String>,
     pub description: String,
-    pub name: Option<String>
+    pub name: Option<String>,
 }
 
 #[derive(Default, Debug, Serialize, Deserialize)]
 pub struct Sass {
     pub sass_dir: String,
-    pub style: String
+    pub style: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AdditionalLink {
     pub title: String,
     pub icon: String,
-    pub url: Url
+    pub url: Url,
 }

@@ -26,10 +26,9 @@ jobs:
         with:
           ruby-version: "3.1" # Not needed with a .ruby-version file
           bundler-cache: true
+      - uses: extractions/setup-just@v4
       - name: "Build Site"
-        run: |
-          cd resume
-          bundle exec jekyll build
+        run: just website_build
         env:
           JEKYLL_ENV: production
       - name: configure aws credentials
@@ -42,3 +41,7 @@ jobs:
         run: aws s3 sync ./resume/_site/ s3://${{ env.S3_BUCKET }} --cache-control max-age=604800
       - name: "Create AWS Cloudfront Invalidation"
         run: aws cloudfront create-invalidation --distribution-id ${{ env.CLOUD_FRONT_DISTRIBUTION_ID }} --paths "/*"
+      - name: "Build pdf resume"
+        run: just resume_pdf
+      - name: "Push resume pdf to AWS S3"
+        run: aws s3 cp ./resume/resume.pdf s3://${{ env.S3_BUCKET }}/resume.pdf --cache-control max-age=604800

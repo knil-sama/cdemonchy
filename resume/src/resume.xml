@@ -34,26 +34,26 @@
                 <url>https://boitepostale.cdemonchy.com/</url>
                 <link_text>Demo</link_text>
             </website>
-            <Github>
-                <url>https://Github.com/knil-sama/boite_postale</url>
+            <github>
+                <url>https://github.com/knil-sama/boite_postale</url>
                 <link_text>repository Boite postale</link_text>
-            </Github>
+            </github>
             <description>Fetch open data from french government using Python to deploy an interactive map in Folium on AWS with Github Actions</description>
         </project>
         <project>
             <title>Rubbersearch</title>
-            <Github>
-                <url>https://Github.com/knil-sama/rubbersearch</url>
+            <github>
+                <url>https://github.com/knil-sama/rubbersearch</url>
                 <link_text>repository Rubbersearch</link_text>
-            </Github>
+            </github>
             <description>Rust code that processes a local file to expose data using a REST API</description>
         </project>
         <project>
             <title>ITM</title>
-            <Github>
-                <url>https://Github.com/knil-sama/itm</url>
+            <github>
+                <url>https://github.com/knil-sama/itm</url>
                 <link_text>repository for ITM</link_text>
-            </Github>
+            </github>
             <description>Shows how to run an airflow workflow  in Python, distibuted with Flower and Celery to process images, extracting metadata before storing it in a MongoDB database,&lt;br/&gt;
             there are some failures that will randomly appear when running the workflow to show how airflow handles it
             </description>

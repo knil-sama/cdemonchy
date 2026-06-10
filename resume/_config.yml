@@ -5,6 +5,10 @@ name: Clement Demonchy
 title: Senior data engineer and data architect freelance
 github_username: knil-sama
 linkedin_username: clement-demonchy-55327778
+additional_links:
+- title: PDF format
+  icon: fa fa-download
+  url: http://cdemonchy.com/resume.pdf
 darkmode: false
 about_profile_image: images/profile.jpg
 about_content: |-
@@ -27,12 +31,24 @@ content:
     layout: top-middle
     link: https://boitepostale.cdemonchy.com/
     link_text: Demo
+    additional_links:
+    - title: repository Boite postale
+      icon: fab fa-github
+      url: https://github.com/knil-sama/boite_postale
     description: Fetch open data from french government using **Python** to deploy an interactive map in Folium on **AWS** with **Github** **Actions**
   - title: Rubbersearch
     layout: top-middle
+    additional_links:
+    - title: repository Rubbersearch
+      icon: fab fa-github
+      url: https://github.com/knil-sama/rubbersearch
     description: '**Rust** code that processes a local file to expose data using a REST **API**'
   - title: ITM
     layout: top-middle
+    additional_links:
+    - title: repository for ITM
+      icon: fab fa-github
+      url: https://github.com/knil-sama/itm
     description: |-
       Shows how to run an airflow workflow  in **Python**, distibuted with Flower and Celery to process images, extracting metadata before storing it in a **MongoDB** database,<br/>
                   there are some failures that will randomly appear when running the workflow to show how airflow handles it

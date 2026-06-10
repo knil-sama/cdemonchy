@@ -1,5 +1,8 @@
-website_run:
+website_run: resume_build
     cd resume && docker compose up --build jekyll
+
+website_build:
+    cd resume && bundle exec jekyll build
 
 docusaurus_install:
     cd blog/website && npm install
