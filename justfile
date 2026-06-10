@@ -17,5 +17,5 @@ resume_build:
     cd resume && cargo run
 
 resume_pdf: resume_build
-    # TODO Should use a dedicated image dockerfile to use correct user
-    cd resume && docker compose up latex && sudo chown cdemonchy:cdemonchy resume.pdf
+    # TODO Should use a dedicated image dockerfile to use correct user // sudo chown cdemonchy:cdemonchy resume.pdf
+    cd resume && docker compose up latex
