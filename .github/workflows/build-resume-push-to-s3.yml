@@ -44,4 +44,4 @@ jobs:
       - name: "Build pdf resume"
         run: just resume_pdf
       - name: "Push resume pdf to AWS S3"
-        run: aws s3 cp ./resume/resume.pdf s3://${{ env.S3_BUCKET }}/resume.pdf --cache-control max-age=604800
+        run: aws s3 cp ./resume/resume.pdf s3://${{ env.S3_BUCKET }}/clement_demonchy_resume.pdf --cache-control max-age=604800

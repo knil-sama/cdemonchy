@@ -108,7 +108,7 @@ fn generate_yaml_config_from_xml_resume(xml_resume: Resume) {
         additional_links: vec![AdditionalLink {
             title: "PDF format".to_string(),
             icon: "fa fa-download".to_string(),
-            url: Url::parse("http://cdemonchy.com/resume.pdf").expect("Crash"),
+            url: Url::parse("http://cdemonchy.com/clement_demonchy_resume.pdf").expect("Crash"),
         }],
         about_content: highlight_skill(&xml_resume.about_me, &TypeHighlight::Markown),
         content,
