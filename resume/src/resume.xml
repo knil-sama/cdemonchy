@@ -73,6 +73,8 @@
             -Identify and extract all sql codes from Airflow pipeline and notebook for analysis using Lakebridge&lt;br/&gt;
             -Export billing informations from Databricks system tables to monitor cost&lt;br/&gt;
             -Create dashboard and monitor in Datadog based on pipeline metrics&lt;br/&gt;
+            -Create tools to migrate from Alembic defined models to dbt like config&lt;br/&gt;
+			-Configure LLM skills to facilitate migrations and ensure proper context is provided and conventions are respected&lt;br/&gt;
             </description>
             <location>Levallois-Perret</location>
         </experience>
